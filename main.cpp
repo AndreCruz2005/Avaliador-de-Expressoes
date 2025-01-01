@@ -8,23 +8,27 @@ class Evaluator
 {
     string expression;
 
-    string postfix;
+    vector<string> postfix;
 
     vector<string> holdingStack;
     vector<int> solveStack;
+    vector<bool> boolPositions;
+
     bool error = false;
 
-    int operatorPrecedence(string operador)
+    int OperatorPrecedence(string operador)
     {
         if (operador == "/" || operador == "*")
-            return 5;
+            return 6;
         else if (operador == "+" || operador == "-")
-            return 4;
-        else if (operador == "||" || operador == "&&")
-            return 3;
+            return 5;
         else if (operador == "<" || operador == ">" || operador == ">=" || operador == "<=")
-            return 2;
+            return 4;
         else if (operador == "==")
+            return 3;
+        else if (operador == "&&")
+            return 2;
+        else if (operador == "||")
             return 1;
         else
             return 0;
@@ -72,29 +76,35 @@ public:
         string token;
         while (stream >> token && !error)
         {
-
             try
             {
-                // Se a token for um número adicona-o a expressão pos-fixa
-                int number = stoi(token);
-                postfix += token + " ";
+                if (token == "true" || token == "false")
+                {
+                    postfix.push_back(token); // Adicona valor booleano à pos-fixa
+                }
+                else
+                {
+                    int number = stoi(token); // Checa se é um número, gera uma excecção se não
+                    postfix.push_back(token); // Adiciona o número à pos-fixa
+                }
             }
             catch (const invalid_argument &)
             {
+                // Em caso de exceção, assume que token é parêntesis ou operador
 
-                // Caso ache um parenteses de esquerda, adiciona-o a holding stack
+                // Caso ache um parêntesis de esquerda, adiciona-o a holding stack
                 if (token == "(")
                 {
                     holdingStack.push_back("(");
                 }
 
-                // Caso ache um parenteses de direita, adiciona todos os items entre parenteses à pos-fixa
+                // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pos-fixa
                 else if (token == ")")
                 {
                     while (holdingStack.back() != "(")
                     {
                         // Adicona o último operador a pos-fixa caso nao seja o (
-                        postfix += holdingStack.back() + " ";
+                        postfix.push_back(holdingStack.back());
                         holdingStack.pop_back();
                     }
                     holdingStack.pop_back();
@@ -103,17 +113,17 @@ public:
                 else
                 {
                     // Determina a precedência do ultimo operador na holding stack e a precedência do novo operador
-                    int topStackPrecedence = holdingStack.size() > 0 ? operatorPrecedence(holdingStack.back()) : -1;
-                    int newOperatorPrecedence = operatorPrecedence(token);
+                    int topStackPrecedence = holdingStack.size() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
+                    int newOperatorPrecedence = OperatorPrecedence(token);
 
                     // Caso a precedencia do topo da stack seja maior, remove operadores até poder adicionar o operador atual
                     while (newOperatorPrecedence <= topStackPrecedence)
                     {
                         // Adiciona operadores removidos à pos-fixa
-                        postfix += holdingStack.back() + " ";
+                        postfix.push_back(holdingStack.back());
                         holdingStack.pop_back();
                         // Atualiza precedência do topo da stack
-                        topStackPrecedence = holdingStack.size() > 0 ? operatorPrecedence(holdingStack.back()) : -1;
+                        topStackPrecedence = holdingStack.size() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                     }
                     // Adiciona novo operador à holdingStack
                     holdingStack.push_back(token);
@@ -124,7 +134,7 @@ public:
         // Adiciona todos os operadores restantes na holding stack à expressão pos-fixa depois que as tokens da expressão são processadas
         while (!holdingStack.empty())
         {
-            postfix += holdingStack.back() + " ";
+            postfix.push_back(holdingStack.back());
             holdingStack.pop_back();
         }
     }
@@ -132,37 +142,69 @@ public:
     // Determina o resultado da expressão na forma pos-fixa
     void EvaluatePostfix()
     {
-        int valor_direita, valor_esquerda;
+        int valorDireita, valorEsquerda;
+        bool isBoolDireita, isBoolEsquerda;
 
-        // Separa os elementos da expressão pelos espaços vazios
-        stringstream stream(postfix);
-        string token;
-
-        while (stream >> token && !error)
+        // Separa os elementos da expressão
+        int index = 0;
+        while (!error && index < postfix.size())
         {
-
+            string token = postfix[index];
+            index++;
             try
             {
-                // Tenta converter token para inteiro
-                int number = stoi(token);
-                solveStack.push_back(number);
+                if (token == "true" || token == "false")
+                {
+                    int booleanValue = (token == "true") ? 1 : 0; // Converte a string para 0 ou 1
+                    solveStack.push_back(booleanValue);           // Adicona valor booleano à solveStack
+                    boolPositions.push_back(true);                // Marca valor como bool
+                }
+                else
+                {
+                    int number = stoi(token);       // Checa se token é um inteiro, gera uma excecção se não
+                    solveStack.push_back(number);   // Adiciona o número à solveStack
+                    boolPositions.push_back(false); // Marca valor como não bool
+                }
             }
             catch (const invalid_argument &)
             {
                 // Se houver uma exceção, assume-se que token é um operador
 
-                // Adquire os últimos dois valores na solveStack e os remove dela
-                valor_direita = solveStack.back();
+                // Garante que os operandos são ambos boolean ou ambos números
+                isBoolDireita = boolPositions.back();
+                boolPositions.pop_back();
+                isBoolEsquerda = boolPositions.back();
+                boolPositions.pop_back();
+
+                if (isBoolDireita != isBoolEsquerda)
+                {
+                    error = true;
+                    break;
+                }
+
+                // Adiciona o tipo do resultado da operação ao vetor boolPositions
+                bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/");
+                boolPositions.push_back(resultType);
+
+                // Garante que o operador é válido para o tipo dos operandos
+                if (isBoolDireita && !(token == "&&" || token == "||" || token == "==") || !isBoolDireita && (token == "&&" || token == "||"))
+                {
+                    error = true;
+                    break;
+                }
+
+                // Adquire os últimos dois valores na solveStack e os remove dela para operação
+                valorDireita = solveStack.back();
                 solveStack.pop_back();
-                valor_esquerda = solveStack.back();
+                valorEsquerda = solveStack.back();
                 solveStack.pop_back();
 
                 // Realiza a operação com os dois últimos valores da solveStack
                 try
                 {
-                    int result = Operations(valor_esquerda, valor_direita, token);
-                    cout << valor_esquerda << " " << token << " " << valor_direita << " = " << result << endl;
-                    solveStack.push_back(result);
+                    int result = Operations(valorEsquerda, valorDireita, token); // Chama metodo para operação
+                    solveStack.push_back(result);                                // Adiciona resultado a solvestack
+                    cout << valorEsquerda << " " << token << " " << valorDireita << " = " << result << endl;
                 }
                 catch (const invalid_argument &)
                 {
@@ -176,7 +218,7 @@ public:
     {
         ExpressionToPostfix();
         EvaluatePostfix();
-        delete this; // Suicídio :(
+        delete this;
     }
 
     ~Evaluator()
@@ -184,7 +226,17 @@ public:
         // Imprime resultado antes de destruir a instância da classe
         if (!error && !solveStack.empty())
         {
-            cout << "Resultado: " << solveStack.back() << endl;
+
+            if (boolPositions.back())
+            {
+                // Imprime true ou false se o resultado final for bool
+                string result = solveStack.back() ? "true" : "false";
+                cout << "Resultado: " << result << endl;
+            }
+            else
+            {
+                cout << "Resultado: " << solveStack.back() << endl;
+            }
         }
         else
         {
