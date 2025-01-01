@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <evaluator.h>
+using namespace std;
+
+Evaluator::Evaluator(string expression)
+{
+    this->expression = expression;
+}
+
+void Evaluator::Evaluate()
+{
+    ExpressionToPostfix();
+    EvaluatePostfix();
+    delete this;
+}
+
+Evaluator::~Evaluator()
+{
+    // Imprime resultado antes de destruir a instância da classe
+    if (!error && !solveStack.empty())
+    {
+
+        if (boolPositions.back())
+        {
+            // Imprime true ou false se o resultado final for bool
+            string result = solveStack.back() ? "true" : "false";
+            cout << "Resultado: " << result << endl;
+        }
+        else
+        {
+            cout << "Resultado: " << solveStack.back() << endl;
+        }
+    }
+    else
+    {
+        cout << "Resultado: error" << endl;
+    }
+}
