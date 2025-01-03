@@ -4,7 +4,7 @@
 #include "evaluator.h"
 using namespace std;
 
-Evaluator::Evaluator(string expression)
+Evaluator::Evaluator(vector<string> expression)
 {
     this->expression = expression;
 }

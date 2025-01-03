@@ -7,12 +7,13 @@ using namespace std;
 class Evaluator
 {
 public:
-    Evaluator(string expression);
+    Evaluator(vector<string>);
     void Evaluate();
     ~Evaluator();
 
 private:
-    string expression;
+    // Vetor com a expressão na forma infixa
+    vector<string> expression;
 
     // Vetor para armazenar a expressão em forma pos-fixa
     vector<string> postfix;
@@ -25,8 +26,8 @@ private:
     // Variável que determina se há um erro na expressão
     bool error = false;
 
-    int OperatorPrecedence(string operador);
-    int Operations(int a, int b, string operador);
+    int OperatorPrecedence(string);
+    int Operations(int, int, string);
     void ExpressionToPostfix();
     void EvaluatePostfix();
 };

@@ -5,7 +5,9 @@ using namespace std;
 
 int Evaluator::OperatorPrecedence(string operador)
 {
-    if (operador == "/" || operador == "*")
+    if (operador == "***")
+        return 7;
+    else if (operador == "/" || operador == "*")
         return 6;
     else if (operador == "+" || operador == "-")
         return 5;
@@ -27,7 +29,7 @@ int Evaluator::Operations(int a, int b, string operador)
         return (a + b);
     else if (operador == "-")
         return (a - b);
-    else if (operador == "*")
+    else if (operador == "*" || operador == "***")
         return (a * b);
     else if (operador == "/")
         return (b != 0) ? (a / b) : throw invalid_argument("Divisão por 0");

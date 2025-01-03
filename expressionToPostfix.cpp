@@ -7,10 +7,10 @@ using namespace std;
 
 void Evaluator::ExpressionToPostfix()
 { // Usado para pegar cada item separado por um espaço vazio na expressão fornecida
-    stringstream stream(expression);
-    string token;
-    while (stream >> token && !error)
+    int index = 0;
+    while (!error && index < postfix.size())
     {
+        string token = expression[index];
         try
         {
             if (token == "true" || token == "false")
@@ -19,7 +19,7 @@ void Evaluator::ExpressionToPostfix()
             }
             else
             {
-                int number = stoi(token); // Checa se é um número, gera uma excecção se não
+                stoi(token);              // Checa se é um número, gera uma excecção se não
                 postfix.push_back(token); // Adiciona o número à pos-fixa
             }
         }

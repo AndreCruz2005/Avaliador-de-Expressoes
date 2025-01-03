@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "evaluator.h"
+#include "formatter.h"
 using namespace std;
 
 int main()
@@ -16,13 +17,14 @@ int main()
     // Recebe cada caso e cria uma instância do Evaluator para imprimir o resultado
     for (int i = 0; i < cases; i++)
     {
-        cout << "Caso " << i << ":" << endl;
         string expressao;
         getline(cin, expressao);
 
-        Evaluator *eval = new Evaluator(expressao);
+        ExpressionFormatter *formatString = new ExpressionFormatter(expressao);
+        Evaluator *eval = new Evaluator(formatString->formattedExpression);
+        delete formatString;
         eval->Evaluate();
-    }
+        }
 
     return 0;
 }
