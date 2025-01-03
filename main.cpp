@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include "evaluator.h"
 #include "formatter.h"
 using namespace std;
