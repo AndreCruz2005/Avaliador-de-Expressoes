@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <vector>
 #include "evaluator.h"
 using namespace std;

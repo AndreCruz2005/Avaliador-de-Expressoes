@@ -1,7 +1,4 @@
 #include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
 #include "evaluator.h"
 #include "formatter.h"
 using namespace std;
@@ -24,7 +21,7 @@ int main()
         Evaluator *eval = new Evaluator(formatString->formattedExpression);
         delete formatString;
         eval->Evaluate();
-        }
+    }
 
     return 0;
 }
