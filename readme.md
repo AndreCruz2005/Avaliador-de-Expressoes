@@ -1,5 +1,10 @@
-# PROJETO - ESTRUTURA DE DADOS ORIENTADA A OBJETOS
-#### Aluno: André Vinícius Nascimento Cruz <avnc>
+# PROJETO - AVALIADOR DE EXPRESSÕES 
+- Aluno: André Vinícius Nascimento Cruz
+- Período: 2024.2
+- Disciplina: CIN0135 - Estrutura de Dados Orientada a Objetos 
+
+### Visão geral
+Programa feito em C++ que recebe strings contendo expressões matemáticas e lógicas, as avalia e imprime o resultado da expressão ou uma mensagem de erro.
 
 ### Compilação
 ```
@@ -7,7 +12,7 @@ g++ -o main main.cpp src/formatter.cpp src/evaluator.cpp src/operations.cpp src/
 ```
 
 ### Execução
-```
+```            
 ./main
 ```
 
@@ -27,8 +32,6 @@ src/
 main.cpp
 
 ```
-O programa é um avaliador de expressões matemáticas e lógicas que lê expressões na forma infixa, converte-as para a forma pós-fixa (notação polonesa reversa) e as avalia. A seguir, uma explicação detalhada do funcionamento do programa:
-
 Estrutura do Projeto
 headers/
 
