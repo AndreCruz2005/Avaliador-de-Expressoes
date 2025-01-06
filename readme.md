@@ -3,20 +3,20 @@
 - Período: 2024.2
 - Disciplina: CIN0135 - Estrutura de Dados Orientada a Objetos 
 
-### Visão geral
+## Visão geral
 Programa feito em C++ que recebe strings contendo expressões matemáticas e lógicas, as avalia e imprime o resultado da expressão ou uma mensagem de erro.
 
-### Compilação
+## Compilação
 ```
 g++ -o main main.cpp src/formatter.cpp src/evaluator.cpp src/operations.cpp src/expressionToPostfix.cpp src/evaluatePostfix.cpp 
 ```
 
-### Execução
+## Execução
 ```            
 ./main
 ```
 
-### Estrutura do projeto
+## Estrutura do projeto
 ```
 headers/
     evaluator.h
@@ -32,30 +32,35 @@ src/
 main.cpp
 
 ```
-Estrutura do Projeto
-headers/
+- **evaluator.h**: Declara a classe Evaluator e seus métodos.
+- **formatter.h**: Declara a classe ExpressionFormatter e seus métodos.
+- **formatter.cpp**: Implementa a classe ExpressionFormatter.
+- **evaluator.cpp**: Implementa o construtor, destrutor e método Evaluate da classe Evaluator.
+- **operations.cpp**: Implementa os métodos OperatorPrecedence e Operations da classe Evaluator.
+- **expressionToPostfix.cpp**: Implementa o método ExpressionToPostfix da classe Evaluator.
+- **evaluatePostfix.cpp**: Implementa o método EvaluatePostfix da classe Evaluator.
+- **main.cpp**: Contém a função main que recebe as expressões a serem avaliadas, instancia as classes e chama seus métodos.
 
-evaluator.h: Declara a classe Evaluator e seus métodos.
-formatter.h: Declara a classe ExpressionFormatter e seus métodos.
-src/
+## Funcionamento do Programa
+### Entrada de Dados
 
-evaluatePostfix.cpp: Implementa o método EvaluatePostfix da classe Evaluator.
-evaluator.cpp: Implementa o construtor, destrutor e método Evaluate da classe Evaluator.
-expressionToPostfix.cpp: Implementa o método ExpressionToPostfix da classe Evaluator.
-formatter.cpp: Implementa a classe ExpressionFormatter.
-operations.cpp: Implementa os métodos OperatorPrecedence e Operations da classe Evaluator.
-main.cpp: Contém a função main que coordena a execução do programa.
-
-Funcionamento do Programa
-Entrada de Dados:
-
-O programa começa lendo o número de casos a serem processados.
-Para cada caso, lê uma expressão na forma de string.
+O programa, no main.cpp, recebe o número de casos a serem processados
+```
+7
+```
+Para cada caso, o programa recebe uma expressão como string
+```
+1
+2 + 3 * 2
+( 2 - - -3 ) * 2
+3 / 2
+true || false == false
+( true || false ) == false
+true + 3
+```
 Formatação da Expressão:
 
-A expressão é passada para uma instância da classe ExpressionFormatter, que a formata e converte para um vetor de strings.
-O método Format da classe ExpressionFormatter chama ConvertToVector para dividir a expressão em tokens e HandleUnaryMinus para tratar operadores unários.
-Avaliação da Expressão:
+A expressão é passada para uma instância da classe ExpressionFormatter, 
 
 A expressão formatada é passada para uma instância da classe Evaluator.
 O método Evaluate da classe Evaluator chama ExpressionToPostfix para converter a expressão infixa para pós-fixa usando o algoritmo Shunting Yard.
