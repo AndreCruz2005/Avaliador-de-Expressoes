@@ -86,7 +86,7 @@ Em seguida, é chamado o método *void HandleUnaryMinus()* que itera sobre os ve
 O vetor retornado pelo método *vector<string> Format()* é então usado para iniciar uma instância da classe Evaluator. O método *void Evaluate()* é chamado em main.cpp que por sua vez chama *void ExpressionToPostfix()*. Este método itera sobre os items do vetor *expression* onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro vetor *postfix* que representa a expressão na notação pós-fixa. Durante este processo o método *int OperatorPrecedence(string)* é chamado para determinar a precedênia dos operadores na expressão.
 ```
 {"2", "3", "2", "*", "+"}
-{"2", "-1", "-3", "*", "-", "2", "*"}
+{"2", "-1", "-3", "***", "-", "2", "*"}
 {"3", "2", "/"}
 {"true", "false", "||", "false", "=="}
 {"true", "false", "||", "false", "=="}
