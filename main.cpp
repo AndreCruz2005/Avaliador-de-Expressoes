@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "evaluator.h"
-#include "formatter.h"
+#include "headers/evaluator.h"
+#include "headers/formatter.h"
 using namespace std;
 
 int main()
@@ -13,16 +13,21 @@ int main()
     cin >> cases;
     cin.ignore();
 
-    // Recebe cada caso e cria uma instância do Evaluator para imprimir o resultado
-    for (int i = 0; i < cases; i++)
+    // Recebe cada caso
+    for (auto i = 0; i < cases; i++)
     {
+        // Pega a expressão como string
         string expressao;
         getline(cin, expressao);
 
         ExpressionFormatter *formatString = new ExpressionFormatter(expressao);
+        formatString->ConvertToVector();
+        formatString->HandleUnaryMinus();
         Evaluator *eval = new Evaluator(formatString->formattedExpression);
         delete formatString;
         eval->Evaluate();
+        
+        
     }
 
     return 0;

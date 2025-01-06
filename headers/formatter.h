@@ -11,14 +11,15 @@ class ExpressionFormatter
     // Variáveis para conversão da expressão de string para vetor
     string lastCharacter = " ";
 
-    // Varíaveis para formatar operadores unários
+    // Varíaveis para formatação de operadores unários
     bool lastTokenWasNumber = false;
-    void ConvertToVector();
-    void HandleUnaryMinus();
-
+    
 public:
     vector<string> formattedExpression;
     ExpressionFormatter(string);
+    void ConvertToVector();
+    void HandleUnaryMinus();
+
 };
 
 #endif

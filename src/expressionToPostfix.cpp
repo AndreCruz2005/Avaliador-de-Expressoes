@@ -1,15 +1,16 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "evaluator.h"
+#include "../headers/evaluator.h"
 using namespace std;
 
 void Evaluator::ExpressionToPostfix()
 { // Usado para pegar cada item separado por um espaço vazio na expressão fornecida
     int index = 0;
-    while (!error && index < postfix.size())
+    while (!error && index < expression.size())
     {
         string token = expression[index];
+        index++;
         try
         {
             if (token == "true" || token == "false")

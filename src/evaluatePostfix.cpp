@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "evaluator.h"
+#include "../headers/evaluator.h"
 using namespace std;
 
 void Evaluator::EvaluatePostfix()
@@ -46,10 +46,6 @@ void Evaluator::EvaluatePostfix()
                 break;
             }
 
-            // Adiciona o tipo do resultado da operação ao vetor boolPositions
-            bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/");
-            boolPositions.push_back(resultType);
-
             // Garante que o operador é válido para o tipo dos operandos
             if (isBoolDireita && !(token == "&&" || token == "||" || token == "==") || !isBoolDireita && (token == "&&" || token == "||"))
             {
@@ -68,10 +64,15 @@ void Evaluator::EvaluatePostfix()
             {
                 int result = Operations(valorEsquerda, valorDireita, token); // Chama metodo para operação
                 solveStack.push_back(result);                                // Adiciona resultado a solvestack
+
+                // Adiciona o tipo do resultado da operação ao vetor boolPositions
+                bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
+                boolPositions.push_back(resultType);
+
                 cout << valorEsquerda << " " << token << " " << valorDireita << " = " << result << endl;
             }
             catch (const invalid_argument &)
-            {
+            {   
                 error = true;
             }
         }

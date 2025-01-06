@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "evaluator.h"
+#include "../headers/evaluator.h"
 using namespace std;
 
 Evaluator::Evaluator(vector<string> expression)

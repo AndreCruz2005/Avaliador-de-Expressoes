@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "evaluator.h"
+#include "../headers/evaluator.h"
 using namespace std;
 
 int Evaluator::OperatorPrecedence(string operador)

@@ -1,14 +1,13 @@
-#include "formatter.h"
 #include <iostream>
 #include <string>
 #include <vector>
+#include "../headers/formatter.h"
 using namespace std;
 
 ExpressionFormatter::ExpressionFormatter(string expression)
 {
     this->expression = expression;
-    ConvertToVector();
-    HandleUnaryMinus();
+    
 }
 
 void ExpressionFormatter::ConvertToVector()
