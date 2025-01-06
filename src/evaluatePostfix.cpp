@@ -5,16 +5,15 @@
 using namespace std;
 
 void Evaluator::EvaluatePostfix()
-{
-    int valorDireita, valorEsquerda;
-    bool isBoolDireita, isBoolEsquerda;
+{ // Processa a operação pós-fixa, ao final o vetor solveStack possuirá apenas 1 elemento que será o resultado
 
-    // Separa os elementos da expressão
-    int index = 0;
-    while (!error && index < postfix.size())
+    // Variáveis que conterão os operandos de cada operação, e identificarão se cada valor é booleano ou não
+    int operandLeft, operandRight;
+    bool isBoolLeft, isBoolRight;
+
+    // Itera sobre os elementos da expressão
+    for (string token : postfix)
     {
-        string token = postfix[index];
-        index++;
         try
         {
             if (token == "true" || token == "false")
@@ -35,45 +34,47 @@ void Evaluator::EvaluatePostfix()
             // Se houver uma exceção, assume-se que token é um operador
 
             // Garante que os operandos são ambos boolean ou ambos números
-            isBoolDireita = boolPositions.back();
+            isBoolRight = boolPositions.back();
             boolPositions.pop_back();
-            isBoolEsquerda = boolPositions.back();
+            isBoolLeft = boolPositions.back();
             boolPositions.pop_back();
 
-            if (isBoolDireita != isBoolEsquerda)
+            if (isBoolRight != isBoolLeft)
             {
                 error = true;
                 break;
             }
 
             // Garante que o operador é válido para o tipo dos operandos
-            if (isBoolDireita && !(token == "&&" || token == "||" || token == "==") || !isBoolDireita && (token == "&&" || token == "||"))
+            if (isBoolRight && !(token == "&&" || token == "||" || token == "==") || !isBoolRight && (token == "&&" || token == "||"))
             {
                 error = true;
                 break;
             }
 
             // Adquire os últimos dois valores na solveStack e os remove dela para operação
-            valorDireita = solveStack.back();
+            operandRight = solveStack.back();
             solveStack.pop_back();
-            valorEsquerda = solveStack.back();
+            operandLeft = solveStack.back();
             solveStack.pop_back();
 
             // Realiza a operação com os dois últimos valores da solveStack
             try
             {
-                int result = Operations(valorEsquerda, valorDireita, token); // Chama metodo para operação
-                solveStack.push_back(result);                                // Adiciona resultado a solvestack
+                int result = Operations(operandLeft, operandRight, token); // Chama metódo para operação
+                solveStack.push_back(result);                              // Adiciona resultado à solvestack
 
                 // Adiciona o tipo do resultado da operação ao vetor boolPositions
                 bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
                 boolPositions.push_back(resultType);
-
-                cout << valorEsquerda << " " << token << " " << valorDireita << " = " << result << endl;
+                
+                // Debug
+                // cout << operandLeft << " " << token << " " << operandRight << " = " << result << endl;
             }
             catch (const invalid_argument &)
-            {   
+            {
                 error = true;
+                break;
             }
         }
     }

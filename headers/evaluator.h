@@ -7,8 +7,13 @@ using namespace std;
 class Evaluator
 {
 public:
+    // Inicia a instância da classe com a expressão em vetor
     Evaluator(vector<string>);
+
+    // Chama os metódos privados para processar a expressão e destrói a instância após
     void Evaluate();
+
+    // Imprime o resultado quando a instância é destruída
     ~Evaluator();
 
 private:
@@ -26,9 +31,14 @@ private:
     // Variável que determina se há um erro na expressão
     bool error = false;
 
+    // Metódos para determinar operações e suas precedências
     int OperatorPrecedence(string);
     int Operations(int, int, string);
+
+    // Metódo que converte a expressão na forma infixa para a pós-fixa
     void ExpressionToPostfix();
+
+    // Metódo que avalia a expressão pós-fixa e chega ao seu resultado 
     void EvaluatePostfix();
 };
 #endif

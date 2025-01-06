@@ -26,15 +26,15 @@ Evaluator::~Evaluator()
         {
             // Imprime true ou false se o resultado final for bool
             string result = solveStack.back() ? "true" : "false";
-            cout << "Resultado: " << result << endl;
+            cout << result << endl;
         }
         else
         {
-            cout << "Resultado: " << solveStack.back() << endl;
+            cout << solveStack.back() << endl;
         }
     }
     else
     {
-        cout << "Resultado: error" << endl;
+        cout << "error" << endl;
     }
 }

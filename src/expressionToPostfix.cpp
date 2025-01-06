@@ -5,22 +5,21 @@
 using namespace std;
 
 void Evaluator::ExpressionToPostfix()
-{ // Usado para pegar cada item separado por um espaço vazio na expressão fornecida
-    int index = 0;
-    while (!error && index < expression.size())
+{ // Usa o algoritmo shunting yard para converter a expressão da forma infixa para a pós-fixa
+
+    // Itera sob cada elemento da expressão infixa
+    for (string token : expression)
     {
-        string token = expression[index];
-        index++;
         try
         {
             if (token == "true" || token == "false")
             {
-                postfix.push_back(token); // Adicona valor booleano à pos-fixa
+                postfix.push_back(token); // Adicona valor booleano à pós-fixa
             }
             else
             {
                 stoi(token);              // Checa se é um número, gera uma excecção se não
-                postfix.push_back(token); // Adiciona o número à pos-fixa
+                postfix.push_back(token); // Adiciona o número à pós-fixa
             }
         }
         catch (const invalid_argument &)
@@ -33,12 +32,12 @@ void Evaluator::ExpressionToPostfix()
                 holdingStack.push_back("(");
             }
 
-            // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pos-fixa
+            // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pós-fixa
             else if (token == ")")
             {
                 while (holdingStack.back() != "(")
                 {
-                    // Adicona o último operador a pos-fixa caso nao seja o (
+                    // Adicona o último operador a pós-fixa caso nao seja o (
                     postfix.push_back(holdingStack.back());
                     holdingStack.pop_back();
                 }
@@ -51,10 +50,10 @@ void Evaluator::ExpressionToPostfix()
                 int topStackPrecedence = holdingStack.size() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 int newOperatorPrecedence = OperatorPrecedence(token);
 
-                // Caso a precedencia do topo da stack seja maior, remove operadores até poder adicionar o operador atual
+                // Caso a precedencia do topo da stack seja maior, remove operadores até poder adicionar o novo operador
                 while (newOperatorPrecedence <= topStackPrecedence)
                 {
-                    // Adiciona operadores removidos à pos-fixa
+                    // Adiciona operadores removidos à pós-fixa
                     postfix.push_back(holdingStack.back());
                     holdingStack.pop_back();
                     // Atualiza precedência do topo da stack
@@ -66,7 +65,7 @@ void Evaluator::ExpressionToPostfix()
         }
     }
 
-    // Adiciona todos os operadores restantes na holding stack à expressão pos-fixa depois que as tokens da expressão são processadas
+    // Adiciona todos os operadores restantes na holding stack à expressão pós-fixa depois que as tokens da expressão são processadas
     while (!holdingStack.empty())
     {
         postfix.push_back(holdingStack.back());

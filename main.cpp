@@ -8,7 +8,6 @@ using namespace std;
 int main()
 {
     // Recebe o número de casos a ser processado
-    cout << "Número de casos: " << endl;
     int cases;
     cin >> cases;
     cin.ignore();
@@ -20,14 +19,10 @@ int main()
         string expressao;
         getline(cin, expressao);
 
-        ExpressionFormatter *formatString = new ExpressionFormatter(expressao);
-        formatString->ConvertToVector();
-        formatString->HandleUnaryMinus();
-        Evaluator *eval = new Evaluator(formatString->formattedExpression);
+        ExpressionFormatter *formatString = new ExpressionFormatter(expressao); // Cria a instância do formatador de expressão
+        Evaluator *eval = new Evaluator(formatString->Format());                // Cria uma instância do evaluator com o vetor retornado pela formatString
         delete formatString;
         eval->Evaluate();
-        
-        
     }
 
     return 0;
