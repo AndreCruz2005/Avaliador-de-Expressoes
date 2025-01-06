@@ -89,7 +89,7 @@ O vetor retornado pelo método *vector<string> Format()* é então usado para in
 {"2", "3", "2", "*", "+"}
 {"2", "-1", "-3", "***", "-", "2", "*"}
 {"3", "2", "/"}
-{"true", "false", "||", "false", "=="}
+{"true", "false", "false", "==", "||"}
 {"true", "false", "||", "false", "=="}
 {"true", "3", "+"}
 ```
