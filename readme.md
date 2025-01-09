@@ -32,14 +32,14 @@ src/
 main.cpp
 
 ```
-- **evaluator.h**: Declara a classe Evaluator e seus métodos.
-- **formatter.h**: Declara a classe ExpressionFormatter e seus métodos.
-- **formatter.cpp**: Implementa a classe ExpressionFormatter.
-- **evaluator.cpp**: Implementa o construtor, destrutor e método Evaluate da classe Evaluator.
-- **operations.cpp**: Implementa os métodos OperatorPrecedence e Operations da classe Evaluator.
-- **expressionToPostfix.cpp**: Implementa o método ExpressionToPostfix da classe Evaluator.
-- **evaluatePostfix.cpp**: Implementa o método EvaluatePostfix da classe Evaluator.
-- **main.cpp**: Contém a função main que recebe as expressões a serem avaliadas, instancia as classes e chama seus métodos.
+- **evaluator.h**: Declaração da classe *Evaluator*.
+- **formatter.h**: Declaração da classe *ExpressionFormatter*.
+- **formatter.cpp**: Implementação da classe *ExpressionFormatter*.
+- **evaluator.cpp**: Implementação do construtor, destrutor e método *Evaluate* da classe *Evaluator*.
+- **operations.cpp**: Implementação dos métodos *OperatorPrecedence* e *Operations* da classe *Evaluator*.
+- **expressionToPostfix.cpp**: Implementação do método *ExpressionToPostfix* da classe *Evaluator*.
+- **evaluatePostfix.cpp**: Implementação do método *EvaluatePostfix* da classe *Evaluator*.
+- **main.cpp**: Contém a função *main* responsável por receber as expressões a serem avaliadas, instanciar as classes e chamar seus métodos.
 
 ## Funcionamento do Programa
 
@@ -59,9 +59,9 @@ true || false == false
 ( true || false ) == false
 true + 3
 ```
-### Formatação da Expressão:
+### Conversão de String para Vetor
 
-Para cada caso, uma instância da classe ExpressionFormatter é iniciada com a expressão em string, o metódo *vector<string> Format()* é chamado em main.cpp que por sua vez chama *void ConvertToVector()* para transformar a expressão em um vetor de strings.
+Para cada caso, uma instância da classe ExpressionFormatter é iniciada com a expressão em string, o metódo *vector[string] Format()* é chamado em main.cpp que por sua vez chama *void ConvertToVector()* para transformar a expressão em um vetor de strings.
 ```
 {"1"}
 {"2", "+", "3", "*", "2"}
@@ -97,7 +97,7 @@ O vetor retornado pelo método *vector<string> Format()* é então usado para in
 Uma vez realizada a conversão, o metódo *void EvaluatePostfix()* é chamado. Ele itera sobre os items de *postfix*, adicionando operandos ao vetor *solveStack*. Quando encontra um operador, remove os dois últimos operandos de *solveStack*, chama o metódo *int Operations(int, int, string)* para realizar a operação e adiciona o resultado à *solveStack*. Paralelamente, o método também atualiza o vetor de bool *boolPositions* que identifica quais operandos na *solveStack* são booleanos e quais são inteiros. O método irá identificar um erro caso ocorra uma operação entre int e bool, caso um operador seja usado com o tipo inapropriado de operando ou caso haja uma divisão por 0, em todos esses casos a iteração sobre *postfix* será interrompida e o bool *error* será modificado para true. Ao final do funcionamento sem erros do método *void EvaluatePostfix()*, o único elemento restante na *solveStack* será o resultado da expressão.
 
 ### Impressão do Resultado
-Após a avaliação, o destrutor da classe Evaluator imprime o resultado final. Caso o bool *error* seja false e o resultado for booleano, imprime "true" ou "false", caso o resultando não seja booleano, imprime o valor numérico. Caso *error* seja true, imprime "error".
+Após a avaliação, a instância de Evaluator é deletada e o método destrutor da classe Evaluator imprime o resultado final. Caso o bool *error* seja false e o resultado for booleano, "true" ou "false" são imprimidos, caso o resultando não seja booleano, o valor numérico é imprimido e caso *error* seja true, "error" é imprimido.
 ```
 1
 8
@@ -107,3 +107,4 @@ true
 false
 error
 ```
+
