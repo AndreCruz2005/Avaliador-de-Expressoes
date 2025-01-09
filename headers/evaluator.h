@@ -20,11 +20,11 @@ private:
     // Vetor com a expressão na forma infixa
     vector<string> expression;
 
-    // Vetor para armazenar a expressão em forma pos-fixa
+    // Vetors usados para converter a expressão da notação infixa para a pós-fixa 
     vector<string> postfix;
+    vector<string> holdingStack;
 
     // Vectors usados para o algoritmo de resolução da expressão pos-fixa
-    vector<string> holdingStack;
     vector<int> solveStack;
     vector<bool> boolPositions;
 
