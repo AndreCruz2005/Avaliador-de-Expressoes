@@ -41,15 +41,13 @@ void Evaluator::EvaluatePostfix()
 
             if (isBoolRight != isBoolLeft)
             {
-                error = true;
-                break;
+                goto errorCaught;
             }
 
             // Garante que o operador é válido para o tipo dos operandos
             if (isBoolRight && !(token == "&&" || token == "||" || token == "==") || !isBoolRight && (token == "&&" || token == "||"))
             {
-                error = true;
-                break;
+                goto errorCaught;
             }
 
             // Adquire os últimos dois valores na solveStack e os remove dela para operação
@@ -67,15 +65,20 @@ void Evaluator::EvaluatePostfix()
                 // Adiciona o tipo do resultado da operação ao vetor boolPositions
                 bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
                 boolPositions.push_back(resultType);
-                
+
                 // Debug
                 // cout << operandLeft << " " << token << " " << operandRight << " = " << result << endl;
             }
             catch (const invalid_argument &)
             {
-                error = true;
-                break;
+                goto errorCaught;
             }
+
+            continue;
+
+        errorCaught:
+            error = true;
+            break;
         }
     }
 }

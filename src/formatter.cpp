@@ -13,7 +13,7 @@ void ExpressionFormatter::ConvertToVector()
 { // Converte a expressão de string para vetor
 
     // Itera sobre os caracteres da string
-    for (int i = 0; i < expression.size(); i++)
+    for (auto i = 0; i < expression.size(); i++)
     {
         string character(1, expression[i]);
 
@@ -43,12 +43,12 @@ void ExpressionFormatter::ConvertToVector()
 
 void ExpressionFormatter::HandleUnaryMinus()
 {
-    for (int i = 0; i < formattedExpression.size(); i++)
-    {   
+    for (auto i = 0; i < formattedExpression.size(); i++)
+    {
         // Itera sobre os elementos do vetor da expressão
         string token = formattedExpression[i];
         try
-        {   
+        {
             // Checa se o elemento é número, gera uma exceção caso não seja
             stoi(token);
             lastTokenWasNumber = true;
@@ -67,7 +67,8 @@ void ExpressionFormatter::HandleUnaryMinus()
     }
 }
 
-vector<string> ExpressionFormatter::Format(){
+vector<string> ExpressionFormatter::Format()
+{
     ConvertToVector();
     HandleUnaryMinus();
     return formattedExpression;

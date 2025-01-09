@@ -7,7 +7,7 @@ using namespace std;
 void Evaluator::ExpressionToPostfix()
 { // Usa o algoritmo shunting yard para converter a expressão da forma infixa para a pós-fixa
 
-    // Itera sob cada elemento da expressão infixa
+    // Itera sobre cada elemento da expressão infixa
     for (string token : expression)
     {
         try
