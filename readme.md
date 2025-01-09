@@ -32,14 +32,14 @@ src/
 main.cpp
 
 ```
-- **evaluator.h**: Declaração da classe *Evaluator*.
-- **formatter.h**: Declaração da classe *ExpressionFormatter*.
-- **formatter.cpp**: Implementação da classe *ExpressionFormatter*.
-- **evaluator.cpp**: Implementação do construtor, destrutor e método *Evaluate* da classe *Evaluator*.
-- **operations.cpp**: Implementação dos métodos *OperatorPrecedence* e *Operations* da classe *Evaluator*.
-- **expressionToPostfix.cpp**: Implementação do método *ExpressionToPostfix* da classe *Evaluator*.
-- **evaluatePostfix.cpp**: Implementação do método *EvaluatePostfix* da classe *Evaluator*.
-- **main.cpp**: Contém a função *main* responsável por receber as expressões a serem avaliadas, instanciar as classes e chamar seus métodos.
+- **evaluator.h**: declaração da classe **Evaluator**.
+- **formatter.h**: declaração da classe **ExpressionFormatter**.
+- **formatter.cpp**: implementação da classe **ExpressionFormatter**.
+- **evaluator.cpp**: implementação do construtor, destrutor e método *Evaluate* da classe **Evaluator**.
+- **operations.cpp**: implementação dos métodos *OperatorPrecedence* e *Operations* da classe **Evaluator**.
+- **expressionToPostfix.cpp**: implementação do método *ExpressionToPostfix* da classe **Evaluator**.
+- **evaluatePostfix.cpp**: implementação do método *EvaluatePostfix* da classe **Evaluator**.
+- **main.cpp**: contém a função *main* responsável por receber as expressões a serem avaliadas, instanciar as classes e chamar seus métodos.
 
 ## Funcionamento do Programa
 
@@ -61,7 +61,7 @@ true + 3
 ```
 ### Conversão de String para Vetor
 
-Para cada caso, uma instância da classe ExpressionFormatter é iniciada com a expressão em string, o metódo *vector[string] Format()* é chamado em main.cpp que por sua vez chama *void ConvertToVector()* para transformar a expressão em um vetor de strings.
+Para cada caso, uma instância da classe *ExpressionFormatter* é iniciada com a expressão em string, o metódo *vector[string] Format()* é chamado em main.cpp que por sua vez chama *void ConvertToVector()* para transformar a expressão em um vetor de strings.
 ```
 {"1"}
 {"2", "+", "3", "*", "2"}
@@ -72,7 +72,7 @@ Para cada caso, uma instância da classe ExpressionFormatter é iniciada com a e
 {"true", "+", "3"}
 ``` 
 
-Em seguida, é chamado o método *void HandleUnaryMinus()* que itera sobre os vetores e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 items '-1' e '***', estes representam a mesma operação mas tornam-a mais fácil de ser processada pelos algoritmos usados nos métodos da classe Evaluator.
+Em seguida, é chamado o método *void HandleUnaryMinus()* que itera sobre os vetores e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 items '-1' e '***', estes representam a mesma operação, mas tornam-na mais fácil de ser processada pelos algoritmos usados nos métodos da classe *Evaluator*.
 ```
 {"1"}
 {"2", "+", "3", "*", "2"}
@@ -83,7 +83,7 @@ Em seguida, é chamado o método *void HandleUnaryMinus()* que itera sobre os ve
 {"true", "+", "3"}
 ``` 
 ### Conversão para Pós-Fixa
-O vetor retornado pelo método *vector[string] Format()* é então usado para iniciar uma instância da classe Evaluator. O método *void Evaluate()* é chamado em main.cpp que por sua vez chama *void ExpressionToPostfix()*. Este método itera sobre os items do vetor *expression* onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro vetor *postfix* que representa a expressão na notação pós-fixa. Durante este processo o método *int OperatorPrecedence(string)* é chamado para determinar a precedênia dos operadores na expressão.
+O vetor retornado pelo método *vector[string] Format()* é então usado para iniciar uma instância da classe *Evaluator*. O método *void Evaluate()* é chamado em main.cpp que por sua vez chama *void ExpressionToPostfix()*. Este método itera sobre os items do vetor *expression* onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro vetor *postfix* que representa a expressão na notação pós-fixa. Durante este processo, o método *int OperatorPrecedence(string)* é chamado para determinar a precedênia dos operadores na expressão.
 ```
 {"1"}
 {"2", "3", "2", "*", "+"}
@@ -100,7 +100,7 @@ Uma vez realizada a conversão, o metódo *void EvaluatePostfix()* é chamado. E
 O método *void EvaluatePostfix()* irá identificar um erro caso ocorra uma operação entre int e bool, caso um operador seja usado com o tipo inapropriado de operando ou caso haja uma divisão por 0. Em todos esses casos a iteração sobre *postfix* será interrompida e o bool *error* será modificado para true.
 
 ### Impressão do Resultado
-Após a avaliação, a instância de Evaluator é deletada e o método destrutor da classe Evaluator imprime o resultado final. Caso o bool *error* seja false e o resultado for booleano, "true" ou "false" são imprimidos, caso o resultando não seja booleano, o valor numérico é imprimido e caso *error* seja true, "error" é imprimido.
+Após a avaliação, a instância de *Evaluator* é deletada e o método destrutor da classe *Evaluator* imprime o resultado. Caso o bool *error* seja false e o resultado for booleano, "true" ou "false" são impressos, caso o resultando não seja booleano, o valor numérico é impresso e caso *error* seja true, "error" é impresso.
 ```
 1
 8
@@ -110,4 +110,3 @@ true
 false
 error
 ```
-
