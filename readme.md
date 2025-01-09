@@ -83,7 +83,7 @@ Em seguida, é chamado o método *void HandleUnaryMinus()* que itera sobre os ve
 {"true", "+", "3"}
 ``` 
 ### Conversão para Pós-Fixa
-O vetor retornado pelo método *vector<string> Format()* é então usado para iniciar uma instância da classe Evaluator. O método *void Evaluate()* é chamado em main.cpp que por sua vez chama *void ExpressionToPostfix()*. Este método itera sobre os items do vetor *expression* onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro vetor *postfix* que representa a expressão na notação pós-fixa. Durante este processo o método *int OperatorPrecedence(string)* é chamado para determinar a precedênia dos operadores na expressão.
+O vetor retornado pelo método *vector[string] Format()* é então usado para iniciar uma instância da classe Evaluator. O método *void Evaluate()* é chamado em main.cpp que por sua vez chama *void ExpressionToPostfix()*. Este método itera sobre os items do vetor *expression* onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro vetor *postfix* que representa a expressão na notação pós-fixa. Durante este processo o método *int OperatorPrecedence(string)* é chamado para determinar a precedênia dos operadores na expressão.
 ```
 {"1"}
 {"2", "3", "2", "*", "+"}
@@ -94,7 +94,10 @@ O vetor retornado pelo método *vector<string> Format()* é então usado para in
 {"true", "3", "+"}
 ```
 ### Avaliação da expressão pós-fixa
-Uma vez realizada a conversão, o metódo *void EvaluatePostfix()* é chamado. Ele itera sobre os items de *postfix*, adicionando operandos ao vetor *solveStack*. Quando encontra um operador, remove os dois últimos operandos de *solveStack*, chama o metódo *int Operations(int, int, string)* para realizar a operação e adiciona o resultado à *solveStack*. Paralelamente, o método também atualiza o vetor de bool *boolPositions* que identifica quais operandos na *solveStack* são booleanos e quais são inteiros. O método irá identificar um erro caso ocorra uma operação entre int e bool, caso um operador seja usado com o tipo inapropriado de operando ou caso haja uma divisão por 0, em todos esses casos a iteração sobre *postfix* será interrompida e o bool *error* será modificado para true. Ao final do funcionamento sem erros do método *void EvaluatePostfix()*, o único elemento restante na *solveStack* será o resultado da expressão.
+Uma vez realizada a conversão, o metódo *void EvaluatePostfix()* é chamado. Este itera sobre os items de *postfix*, adicionando operandos ao vetor *solveStack*. Quando um operador é achado, os dois últimos operandos de *solveStack* são removidos e o método *int Operations(int, int, string)* é chamado para realizar a operação, com o resultado sendo adicionanado à *solveStack*. Paralelamente, o método também atualiza o vetor de bool *boolPositions* que identifica quais operandos na *solveStack* são booleanos e quais são inteiros. Ao final de uma execucação do método sem erros, o único elemento restante na *solveStack* será o resultado da expressão.
+
+### Identificação de erros
+O método *void EvaluatePostfix()* irá identificar um erro caso ocorra uma operação entre int e bool, caso um operador seja usado com o tipo inapropriado de operando ou caso haja uma divisão por 0. Em todos esses casos a iteração sobre *postfix* será interrompida e o bool *error* será modificado para true.
 
 ### Impressão do Resultado
 Após a avaliação, a instância de Evaluator é deletada e o método destrutor da classe Evaluator imprime o resultado final. Caso o bool *error* seja false e o resultado for booleano, "true" ou "false" são imprimidos, caso o resultando não seja booleano, o valor numérico é imprimido e caso *error* seja true, "error" é imprimido.
