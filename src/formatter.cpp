@@ -49,8 +49,16 @@ void ExpressionFormatter::HandleUnaryMinus()
         string token = formattedExpression[i];
         try
         {
+            // Considera parentêses direito como número
+            if (token == ")")
+            {
+                goto wasNumber;
+            }
+
             // Checa se o elemento é número, gera uma exceção caso não seja
             stoi(token);
+
+        wasNumber:
             lastTokenWasNumber = true;
         }
         catch (const invalid_argument &)
