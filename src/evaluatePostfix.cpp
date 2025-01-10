@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include "../headers/list.h"
 #include "../headers/evaluator.h"
 using namespace std;
 
@@ -12,21 +12,23 @@ void Evaluator::EvaluatePostfix()
     bool isBoolLeft, isBoolRight;
 
     // Itera sobre os elementos da expressão
-    for (string token : postfix)
+    int lim = postfix.length();
+    for (auto i = 0; i < lim; i++)
     {
+        string token = *postfix.at(i);
         try
         {
             if (token == "true" || token == "false")
             {
                 int booleanValue = (token == "true") ? 1 : 0; // Converte a string para 0 ou 1
-                solveStack.push_back(booleanValue);           // Adicona valor booleano à solveStack
-                boolPositions.push_back(true);                // Marca valor como bool
+                solveStack.insert(booleanValue);              // Adicona valor booleano à solveStack
+                boolPositions.insert(true);                   // Marca valor como bool
             }
             else
             {
-                int number = stoi(token);       // Checa se token é um inteiro, gera uma excecção se não
-                solveStack.push_back(number);   // Adiciona o número à solveStack
-                boolPositions.push_back(false); // Marca valor como não bool
+                int number = stoi(token);    // Checa se token é um inteiro, gera uma excecção se não
+                solveStack.insert(number);   // Adiciona o número à solveStack
+                boolPositions.insert(false); // Marca valor como não bool
             }
         }
         catch (const invalid_argument &)
@@ -34,10 +36,8 @@ void Evaluator::EvaluatePostfix()
             // Se houver uma exceção, assume-se que token é um operador
 
             // Garante que os operandos são ambos boolean ou ambos números
-            isBoolRight = boolPositions.back();
-            boolPositions.pop_back();
-            isBoolLeft = boolPositions.back();
-            boolPositions.pop_back();
+            isBoolRight = boolPositions.pop();
+            isBoolLeft = boolPositions.pop();
 
             if (isBoolRight != isBoolLeft)
             {
@@ -51,20 +51,18 @@ void Evaluator::EvaluatePostfix()
             }
 
             // Adquire os últimos dois valores na solveStack e os remove dela para operação
-            operandRight = solveStack.back();
-            solveStack.pop_back();
-            operandLeft = solveStack.back();
-            solveStack.pop_back();
+            operandRight = solveStack.pop();
+            operandLeft = solveStack.pop();
 
             // Realiza a operação com os dois últimos valores da solveStack
             try
             {
                 int result = Operations(operandLeft, operandRight, token); // Chama metódo para operação
-                solveStack.push_back(result);                              // Adiciona resultado à solvestack
+                solveStack.insert(result);                                 // Adiciona resultado à solvestack
 
                 // Adiciona o tipo do resultado da operação ao vetor boolPositions
                 bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
-                boolPositions.push_back(resultType);
+                boolPositions.insert(resultType);
 
                 // Debug
                 // cout << operandLeft << " " << token << " " << operandRight << " = " << result << endl;

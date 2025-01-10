@@ -1,12 +1,16 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include "headers/list.h"
 #include "headers/evaluator.h"
 #include "headers/formatter.h"
 using namespace std;
 
 int main()
 {
+    List<float> myList;
+    myList.insert(43.32f);
+    cout << *myList.at(0) << endl;
+
     // Recebe o número de casos a ser processado
     int cases;
     cin >> cases;

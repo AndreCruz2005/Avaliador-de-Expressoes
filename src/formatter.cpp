@@ -34,7 +34,7 @@ void ExpressionFormatter::ConvertToVector()
         // Caso o último caractere não tenho sido vazio, concatena o caractere ao último elemento do vetor, de modo a preservar elementos com múltiplos caracteres
         else
         {
-            formattedExpression.at(formattedExpression.length() - 1) += character;
+            *formattedExpression.at(formattedExpression.length() - 1) += character;
         }
 
         // Atualiza último caractere
@@ -47,11 +47,19 @@ void ExpressionFormatter::HandleUnaryMinus()
     for (auto i = 0; i < formattedExpression.length(); i++)
     {
         // Itera sobre os elementos do vetor da expressão
-        string token = formattedExpression.at(i);
+        string token = *formattedExpression.at(i);
         try
         {
+            // Considera parentêses direito como número
+            if (token == ")")
+            {
+                goto wasNumber;
+            }
+
             // Checa se o elemento é número, gera uma exceção caso não seja
             stoi(token);
+
+        wasNumber:
             lastTokenWasNumber = true;
         }
         catch (const invalid_argument &)
@@ -60,7 +68,7 @@ void ExpressionFormatter::HandleUnaryMinus()
             if (token == "-" && !lastTokenWasNumber)
             {
                 // Substitui o operador unário por -1 ***. *** opera como multiplicação mas com mais prioridade
-                formattedExpression.at(i) = "-1";
+                *formattedExpression.at(i) = "-1";
                 formattedExpression.insert("***", i + 1);
             }
             lastTokenWasNumber = false;

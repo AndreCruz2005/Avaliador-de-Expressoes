@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include "../headers/list.h"
 #include "../headers/evaluator.h"
 using namespace std;
 
-Evaluator::Evaluator(vector<string> expression)
+Evaluator::Evaluator(List<string> expression)
 {
     this->expression = expression;
 }
@@ -13,24 +13,25 @@ void Evaluator::Evaluate()
 {
     ExpressionToPostfix();
     EvaluatePostfix();
+
     delete this;
 }
 
 Evaluator::~Evaluator()
 {
     // Imprime resultado antes de destruir a instância da classe
-    if (!error && !solveStack.empty())
+    if (!error && solveStack.length() > 0)
     {
 
-        if (boolPositions.back())
+        if (*boolPositions.at(0))
         {
             // Imprime true ou false se o resultado final for bool
-            string result = solveStack.back() ? "true" : "false";
+            string result = *solveStack.at(0) ? "true" : "false";
             cout << result << endl;
         }
         else
         {
-            cout << solveStack.back() << endl;
+            cout << *solveStack.at(0) << endl;
         }
     }
     else
