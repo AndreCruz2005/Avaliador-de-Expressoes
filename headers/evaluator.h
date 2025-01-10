@@ -20,7 +20,7 @@ private:
     // Vetor com a expressão na forma infixa
     vector<string> expression;
 
-    // Vetors usados para converter a expressão da notação infixa para a pós-fixa 
+    // Vetors usados para converter a expressão da notação infixa para a pós-fixa
     vector<string> postfix;
     vector<string> holdingStack;
 
@@ -38,7 +38,7 @@ private:
     // Metódo que converte a expressão na forma infixa para a pós-fixa
     void ExpressionToPostfix();
 
-    // Metódo que avalia a expressão pós-fixa e chega ao seu resultado 
+    // Metódo que avalia a expressão pós-fixa e chega ao seu resultado
     void EvaluatePostfix();
 };
 #endif

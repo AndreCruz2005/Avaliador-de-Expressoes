@@ -2,12 +2,16 @@
 #define FORMATTER_H
 #include <string>
 #include <vector>
+#include "list.h"
 using namespace std;
 
 class ExpressionFormatter
 {
     // Variável que contém a expressão original em string
     string expression;
+
+    // Vetor que conterá a expressão formatada a partir da string
+    List<string> formattedExpression;
 
     // Variáveis para conversão da expressão de string para vetor
     string lastCharacter = " ";
@@ -22,14 +26,11 @@ class ExpressionFormatter
     void HandleUnaryMinus();
 
 public:
-    // Vetor que conterá a expressão formatada a partir da string
-    vector<string> formattedExpression;
-
     // Inicialiaza a instância da classe com expressão em string
     ExpressionFormatter(string);
 
     // Chama metódos privados para processar a string e retornar a string formatada como vetor
-    vector<string> Format();
+    List<string> Format();
 };
 
 #endif

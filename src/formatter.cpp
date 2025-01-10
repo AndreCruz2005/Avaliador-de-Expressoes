@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "../headers/formatter.h"
+#include "../headers/list.h"
 using namespace std;
 
 ExpressionFormatter::ExpressionFormatter(string expression)
@@ -27,13 +28,13 @@ void ExpressionFormatter::ConvertToVector()
         // Adiciona caractere como novo elemento do vetor caso o último caractere tenha sido vazio
         if (lastCharacter == " ")
         {
-            formattedExpression.push_back(character);
+            formattedExpression.insert(character);
         }
 
         // Caso o último caractere não tenho sido vazio, concatena o caractere ao último elemento do vetor, de modo a preservar elementos com múltiplos caracteres
         else
         {
-            formattedExpression.back() += character;
+            formattedExpression.at(formattedExpression.length() - 1) += character;
         }
 
         // Atualiza último caractere
@@ -43,10 +44,10 @@ void ExpressionFormatter::ConvertToVector()
 
 void ExpressionFormatter::HandleUnaryMinus()
 {
-    for (auto i = 0; i < formattedExpression.size(); i++)
+    for (auto i = 0; i < formattedExpression.length(); i++)
     {
         // Itera sobre os elementos do vetor da expressão
-        string token = formattedExpression[i];
+        string token = formattedExpression.at(i);
         try
         {
             // Checa se o elemento é número, gera uma exceção caso não seja
@@ -59,15 +60,15 @@ void ExpressionFormatter::HandleUnaryMinus()
             if (token == "-" && !lastTokenWasNumber)
             {
                 // Substitui o operador unário por -1 ***. *** opera como multiplicação mas com mais prioridade
-                formattedExpression[i] = "-1";
-                formattedExpression.insert(formattedExpression.begin() + i + 1, "***");
+                formattedExpression.at(i) = "-1";
+                formattedExpression.insert("***", i + 1);
             }
             lastTokenWasNumber = false;
         }
     }
 }
 
-vector<string> ExpressionFormatter::Format()
+List<string> ExpressionFormatter::Format()
 {
     ConvertToVector();
     HandleUnaryMinus();
