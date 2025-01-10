@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "../headers/list.h"
 using namespace std;
 
@@ -103,9 +104,11 @@ int main()
 
     List<string> listed;
     listed.insert("Ur mom");
-    listed.insert("Ur mom");
-    listed.insert("Ur mom");
-    for (auto i = 0; i < listed.length() - 1; i++)
+    listed.insert("Ur dad");
+    listed.insert("Ur sis");
+    listed.insert("Ur bro");
+    int len = listed.length();
+    for (auto i = 0; i < len - 1; i++)
     {
         cout << listed.at(i) << endl;
     }
