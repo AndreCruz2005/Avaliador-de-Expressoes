@@ -19,7 +19,7 @@ class ExpressionFormatter
     bool lastTokenWasNumber = false;
 
     // Converte a expressão de string para lista e armazena-a em formattedExpression
-    void ConvertToVector();
+    void ConvertToList();
 
     // Converte os menos unários no lista para uma representação que pode ser mais facilmente processada
     void HandleUnaryMinus();

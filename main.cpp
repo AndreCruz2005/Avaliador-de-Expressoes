@@ -15,19 +15,22 @@ int main()
     // Recebe cada caso
     for (auto i = 0; i < cases; i++)
     {
-        cout << "xabeu";
+        cout << "Expressão: " << endl;
         // Pega a expressão como string
         string expressao;
         getline(cin, expressao);
 
-        cout << "xabeu";
         ExpressionFormatter *formatString = new ExpressionFormatter(expressao); // Cria a instância do formatador de expressão
         List<string> returnList = formatString->Format();
-        delete formatString;
 
-        cout << "xabeu";
-        Evaluator *eval = new Evaluator(returnList); // Cria uma instância do evaluator com a lista retornado pela formatString
-        eval->Evaluate();
+        cout << "Lista: ";
+        for (auto i = 0; i < returnList.length(); i++)
+        {
+            cout << *returnList.at(i) << " ";
+        }
+        cout << "\n";
+
+        delete formatString;
     }
 
     return 0;
