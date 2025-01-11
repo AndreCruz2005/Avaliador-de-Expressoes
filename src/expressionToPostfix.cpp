@@ -7,6 +7,8 @@ using namespace std;
 void Evaluator::ExpressionToPostfix()
 { // Usa o algoritmo shunting yard para converter a expressão da forma infixa para a pós-fixa
 
+    cout << "test: " << *expression.at(3) << endl;
+
     // Itera sobre cada elemento da expressão infixa
     int lim = expression.length();
     for (auto i = 0; i < lim; i++)

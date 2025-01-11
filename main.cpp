@@ -7,10 +7,6 @@ using namespace std;
 
 int main()
 {
-    List<float> myList;
-    myList.insert(43.32f);
-    cout << *myList.at(0) << endl;
-
     // Recebe o número de casos a ser processado
     int cases;
     cin >> cases;
@@ -19,13 +15,18 @@ int main()
     // Recebe cada caso
     for (auto i = 0; i < cases; i++)
     {
+        cout << "xabeu";
         // Pega a expressão como string
         string expressao;
         getline(cin, expressao);
 
+        cout << "xabeu";
         ExpressionFormatter *formatString = new ExpressionFormatter(expressao); // Cria a instância do formatador de expressão
-        Evaluator *eval = new Evaluator(formatString->Format());                // Cria uma instância do evaluator com o vetor retornado pela formatString
+        List<string> returnList = formatString->Format();
         delete formatString;
+
+        cout << "xabeu";
+        Evaluator *eval = new Evaluator(returnList); // Cria uma instância do evaluator com a lista retornado pela formatString
         eval->Evaluate();
     }
 
