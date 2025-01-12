@@ -16,12 +16,12 @@ void Evaluator::ExpressionToPostfix()
         {
             if (token == "true" || token == "false")
             {
-                postfix.insert(token); // Adicona valor booleano à pós-fixa
+                postfix.append(token); // Adicona valor booleano à pós-fixa
             }
             else
             {
                 stoi(token);           // Checa se é um número, gera uma excecção se não
-                postfix.insert(token); // Adiciona o número à pós-fixa
+                postfix.append(token); // Adiciona o número à pós-fixa
             }
         }
         catch (invalid_argument &)
@@ -31,7 +31,7 @@ void Evaluator::ExpressionToPostfix()
             // Caso ache um parêntesis de esquerda, adiciona-o a holding stack
             if (token == "(")
             {
-                holdingStack.insert("(");
+                holdingStack.append("(");
             }
 
             // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pós-fixa
@@ -40,7 +40,7 @@ void Evaluator::ExpressionToPostfix()
                 while (holdingStack.back() != "(")
                 {
                     // Adicona o último operador a pós-fixa caso nao seja o (
-                    postfix.insert(holdingStack.pop());
+                    postfix.append(holdingStack.pop());
                 }
                 holdingStack.pop();
             }
@@ -55,13 +55,14 @@ void Evaluator::ExpressionToPostfix()
                 while (newOperatorPrecedence <= topStackPrecedence)
                 {
                     // Adiciona operadores removidos à pós-fixa
-                    postfix.insert(holdingStack.back());
+                    postfix.append(holdingStack.back());
                     holdingStack.pop();
+
                     // Atualiza precedência do topo da stack
                     topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 }
                 // Adiciona novo operador à holdingStack
-                holdingStack.insert(token);
+                holdingStack.append(token);
             }
         }
     }
@@ -69,6 +70,6 @@ void Evaluator::ExpressionToPostfix()
     // Adiciona todos os operadores restantes na holding stack à expressão pós-fixa depois que as tokens da expressão são processadas
     while (holdingStack.length() > 0)
     {
-        postfix.insert(holdingStack.pop());
+        postfix.append(holdingStack.pop());
     }
 }

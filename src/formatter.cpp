@@ -27,7 +27,7 @@ void ExpressionFormatter::ConvertToList()
         // Adiciona caractere como novo elemento do lista caso o último caractere tenha sido vazio
         if (lastCharacter == " ")
         {
-            formattedExpression.insert(character);
+            formattedExpression.append(character);
         }
 
         // Caso o último caractere não tenho sido vazio, concatena o caractere ao último elemento do lista, de modo a preservar elementos com múltiplos caracteres
@@ -69,7 +69,7 @@ void ExpressionFormatter::HandleUnaryMinus()
             {
                 // Substitui o operador unário por -1 ***. *** opera como multiplicação mas com mais prioridade
                 formattedExpression[i] += "1";
-                formattedExpression.insert("***", i + 1);
+                formattedExpression.append("***", i + 1);
             }
             lastTokenWasNumber = false;
         }

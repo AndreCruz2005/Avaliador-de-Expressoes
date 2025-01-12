@@ -5,7 +5,7 @@
 using namespace std;
 
 void Evaluator::EvaluatePostfix()
-{ // Processa a operação pós-fixa, ao final o vetor solveStack possuirá apenas 1 elemento que será o resultado
+{ // Processa a operação pós-fixa, ao final o lista solveStack possuirá apenas 1 elemento que será o resultado
 
     // Variáveis que conterão os operandos de cada operação, e identificarão se cada valor é booleano ou não
     int operandLeft, operandRight;
@@ -21,14 +21,14 @@ void Evaluator::EvaluatePostfix()
             if (token == "true" || token == "false")
             {
                 int booleanValue = (token == "true") ? 1 : 0; // Converte a string para 0 ou 1
-                solveStack.insert(booleanValue);              // Adicona valor booleano à solveStack
-                boolPositions.insert(true);                   // Marca valor como bool
+                solveStack.append(booleanValue);              // Adicona valor booleano à solveStack
+                boolPositions.append(true);                   // Marca valor como bool
             }
             else
             {
                 int number = stoi(token);    // Checa se token é um inteiro, gera uma excecção se não
-                solveStack.insert(number);   // Adiciona o número à solveStack
-                boolPositions.insert(false); // Marca valor como não bool
+                solveStack.append(number);   // Adiciona o número à solveStack
+                boolPositions.append(false); // Marca valor como não bool
             }
         }
         catch (invalid_argument &)
@@ -58,11 +58,11 @@ void Evaluator::EvaluatePostfix()
             try
             {
                 int result = Operations(operandLeft, operandRight, token); // Chama metódo para operação
-                solveStack.insert(result);                                 // Adiciona resultado à solvestack
+                solveStack.append(result);                                 // Adiciona resultado à solvestack
 
-                // Adiciona o tipo do resultado da operação ao vetor boolPositions
+                // Adiciona o tipo do resultado da operação ao lista boolPositions
                 bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
-                boolPositions.insert(resultType);
+                boolPositions.append(resultType);
 
                 // Debug
                 // cout << operandLeft << " " << token << " " << operandRight << " = " << result << endl;
