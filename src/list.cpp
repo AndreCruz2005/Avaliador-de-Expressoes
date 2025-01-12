@@ -2,7 +2,7 @@
 #include <string>
 #include "../headers/list.h"
 
-template <typename T>
+template <class T>
 List<T>::List()
 {
     arr = new T[1];
@@ -10,7 +10,7 @@ List<T>::List()
     currentSize = 0;
 }
 
-template <typename T>
+template <class T>
 void List<T>::expand()
 { // Função para alocar mais espaço
 
@@ -29,7 +29,7 @@ void List<T>::expand()
     arr = temporary;
 }
 
-template <typename T>
+template <class T>
 void List<T>::append(T item, int idx)
 {
     if (isFull())
@@ -47,31 +47,32 @@ void List<T>::append(T item, int idx)
     currentSize++;
 }
 
-template <typename T>
+template <class T>
 void List<T>::append(T item)
 {
     if (isFull())
     {
         expand();
     }
+
     arr[currentSize] = item;
     currentSize++;
 }
 
-template <typename T>
+template <class T>
 T &List<T>::operator[](int idx)
 { // Sobrecarga do operador [] para acessar item
     return arr[idx];
 }
 
-template <typename T>
+template <class T>
 T List<T>::pop()
 { // Remove e retorna último item
     currentSize--;
     return arr[currentSize];
 }
 
-template <typename T>
+template <class T>
 void List<T>::print()
 { // Debug
     for (auto j = 0; j < currentSize; j++)
