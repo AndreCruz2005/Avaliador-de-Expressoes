@@ -14,20 +14,20 @@ class List
 
         // Cria um pointer para uma nova array com o dobro do espaço
         maxSize *= 2;
-        T *temporaryArray = new T[maxSize];
+        T *temporary = new T[maxSize];
 
         // Copia items para a nova array
         for (int i = 0; i < currentSize; i++)
         {
-            temporaryArray[i] = arr[i];
+            temporary[i] = arr[i];
         }
 
         // Substitui array
         delete[] arr;
-        arr = temporaryArray;
+        arr = temporary;
     }
 
-    inline bool isFull() { return currentSize == maxSize; };
+    inline bool isFull() { return currentSize == maxSize; }
 
 public:
     List()
@@ -88,6 +88,6 @@ public:
 
     inline int length() { return currentSize; };
 
-    inline void free() { delete[] arr; };
+    inline void free() { delete[] arr; }
 };
 #endif
