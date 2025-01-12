@@ -26,6 +26,7 @@ g++ -o main main.cpp src/list.cpp src/formatter.cpp src/evaluator.cpp src/operat
 headers/
     evaluator.h
     formatter.h
+    list.h
 
 src/
     evaluatePostfix.cpp
