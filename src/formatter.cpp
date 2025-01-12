@@ -62,7 +62,7 @@ void ExpressionFormatter::HandleUnaryMinus()
         wasNumber:
             lastTokenWasNumber = true;
         }
-        catch (const invalid_argument &)
+        catch (invalid_argument &)
         {
             // Checa se a token é um '-' após um operador, ou seja, um operador unário
             if (token == "-" && !lastTokenWasNumber)

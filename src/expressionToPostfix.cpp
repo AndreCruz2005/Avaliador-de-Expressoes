@@ -24,7 +24,7 @@ void Evaluator::ExpressionToPostfix()
                 postfix.insert(token); // Adiciona o número à pós-fixa
             }
         }
-        catch (const invalid_argument &)
+        catch (invalid_argument &)
         {
             // Em caso de exceção, assume que token é parêntesis ou operador
 

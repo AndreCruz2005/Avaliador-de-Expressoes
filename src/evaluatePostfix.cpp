@@ -31,7 +31,7 @@ void Evaluator::EvaluatePostfix()
                 boolPositions.insert(false); // Marca valor como não bool
             }
         }
-        catch (const invalid_argument &)
+        catch (invalid_argument &)
         {
             // Se houver uma exceção, assume-se que token é um operador
 
@@ -67,7 +67,7 @@ void Evaluator::EvaluatePostfix()
                 // Debug
                 // cout << operandLeft << " " << token << " " << operandRight << " = " << result << endl;
             }
-            catch (const invalid_argument &)
+            catch (invalid_argument &)
             {
                 goto errorCaught;
             }

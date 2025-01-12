@@ -2,7 +2,7 @@
 #define LIST_H
 using namespace std;
 
-template <typename T>
+template <class T>
 class List
 {
     T *arr;
