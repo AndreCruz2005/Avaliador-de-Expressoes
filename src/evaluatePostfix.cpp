@@ -45,7 +45,7 @@ void Evaluator::EvaluatePostfix()
             }
 
             // Garante que o operador é válido para o tipo dos operandos
-            if (isBoolRight && !(token == "&&" || token == "||" || token == "==") || !isBoolRight && (token == "&&" || token == "||"))
+            if (isBoolRight && !(token == "&&" || token == "||" || token == "==" || token == "!=") || !isBoolRight && (token == "&&" || token == "||"))
             {
                 goto errorCaught;
             }
