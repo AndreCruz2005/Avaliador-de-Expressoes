@@ -21,6 +21,8 @@ int main()
 
         Evaluator inputEvaluator(returnList);
         inputEvaluator.Evaluate();
+
+        returnList.free();
     }
 
     return 0;

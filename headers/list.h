@@ -79,5 +79,7 @@ public:
     inline T &back() { return arr[currentSize - 1]; }
 
     inline int length() { return currentSize; };
+
+    inline void free() { delete[] arr; };
 };
 #endif
