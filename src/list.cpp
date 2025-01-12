@@ -38,7 +38,7 @@ void List<T>::append(T item, int idx)
         expand();
     }
 
-    // Abre espaço para um novo item movendo todos os items que estão a direita do index, 1 espaço
+    // Abre espaço para um novo item movendo todos os items que estão a direita do índice, 1 espaço
     for (int i = currentSize; i > idx; i--)
     {
         arr[i] = arr[i - 1];
