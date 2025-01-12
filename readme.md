@@ -92,7 +92,7 @@ Para cada caso, uma instância da classe _ExpressionFormatter_ é iniciada com a
 {"true", "+", "3"}
 ```
 
-Em seguida, é chamado o método _void HandleUnaryMinus()_ que itera sobre as listas e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 items '-1' e '*\*\*', estes representam a mesma operação, mas tornam-na mais fácil de ser processada pelos algoritmos usados nos métodos da classe *Evaluator\*.
+Em seguida, é chamado o método _void HandleUnaryMinus()_ que itera sobre as listas e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 items '-1' e '*\*\*', estes representam a mesma operação, mas tornam-na mais fácil de ser processada pelos algoritmos usados nos métodos da classe *Evaluator*.
 
 ```
 {"1"}
