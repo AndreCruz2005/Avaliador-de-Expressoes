@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include "../headers/formatter.h"
+#include "../headers/list.h"
 using namespace std;
 
 ExpressionFormatter::ExpressionFormatter(string expression)
@@ -9,8 +9,8 @@ ExpressionFormatter::ExpressionFormatter(string expression)
     this->expression = expression;
 }
 
-void ExpressionFormatter::ConvertToVector()
-{ // Converte a expressão de string para vetor
+void ExpressionFormatter::ConvertToList()
+{ // Converte a expressão de string para lista
 
     // Itera sobre os caracteres da string
     for (auto i = 0; i < expression.size(); i++)
@@ -24,13 +24,13 @@ void ExpressionFormatter::ConvertToVector()
             continue;
         }
 
-        // Adiciona caractere como novo elemento do vetor caso o último caractere tenha sido vazio
+        // Adiciona caractere como novo elemento do lista caso o último caractere tenha sido vazio
         if (lastCharacter == " ")
         {
-            formattedExpression.push_back(character);
+            formattedExpression.append(character);
         }
 
-        // Caso o último caractere não tenho sido vazio, concatena o caractere ao último elemento do vetor, de modo a preservar elementos com múltiplos caracteres
+        // Caso o último caractere não tenho sido vazio, concatena o caractere ao último elemento do lista, de modo a preservar elementos com múltiplos caracteres
         else
         {
             formattedExpression.back() += character;
@@ -43,10 +43,11 @@ void ExpressionFormatter::ConvertToVector()
 
 void ExpressionFormatter::HandleUnaryMinus()
 {
-    for (auto i = 0; i < formattedExpression.size(); i++)
+    for (auto i = 0; i < formattedExpression.length(); i++)
     {
-        // Itera sobre os elementos do vetor da expressão
+        // Itera sobre os elementos do lista da expressão
         string token = formattedExpression[i];
+
         try
         {
             // Considera parentêses direito como número
@@ -61,23 +62,23 @@ void ExpressionFormatter::HandleUnaryMinus()
         wasNumber:
             lastTokenWasNumber = true;
         }
-        catch (const invalid_argument &)
+        catch (invalid_argument &)
         {
             // Checa se a token é um '-' após um operador, ou seja, um operador unário
             if (token == "-" && !lastTokenWasNumber)
             {
                 // Substitui o operador unário por -1 ***. *** opera como multiplicação mas com mais prioridade
-                formattedExpression[i] = "-1";
-                formattedExpression.insert(formattedExpression.begin() + i + 1, "***");
+                formattedExpression[i] += "1";
+                formattedExpression.append("***", i + 1);
             }
             lastTokenWasNumber = false;
         }
     }
 }
 
-vector<string> ExpressionFormatter::Format()
+List<string> ExpressionFormatter::Format()
 {
-    ConvertToVector();
+    ConvertToList();
     HandleUnaryMinus();
     return formattedExpression;
 }

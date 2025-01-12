@@ -1,28 +1,33 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include "headers/list.h"
 #include "headers/evaluator.h"
 #include "headers/formatter.h"
 using namespace std;
 
 int main()
 {
-    // Recebe o número de casos a ser processado
+    // Recebe número de casos
     int cases;
     cin >> cases;
     cin.ignore();
 
-    // Recebe cada caso
     for (auto i = 0; i < cases; i++)
     {
-        // Pega a expressão como string
-        string expressao;
-        getline(cin, expressao);
+        // Recebe a expressão como string em cada caso
+        string expression;
+        getline(cin, expression);
 
-        ExpressionFormatter *formatString = new ExpressionFormatter(expressao); // Cria a instância do formatador de expressão
-        Evaluator *eval = new Evaluator(formatString->Format());                // Cria uma instância do evaluator com o vetor retornado pela formatString
-        delete formatString;
-        eval->Evaluate();
+        // Transforma string em lista e formata operadores unários
+        ExpressionFormatter inputFormatter(expression);
+        List<string> returnList = inputFormatter.Format();
+
+        // Avalia expressão
+        Evaluator inputEvaluator(returnList);
+        inputEvaluator.Evaluate();
+
+        // Libera memória alocada pela lista
+        returnList.free();
     }
 
     return 0;
