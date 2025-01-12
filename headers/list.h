@@ -5,89 +5,47 @@ using namespace std;
 template <class T>
 class List
 {
-    T *arr;          // Pointer para a array que armazena os elementos da lista
-    int currentSize; // Número de items na lista
-    int maxSize;     // Espaço alocado para a lista
+    // Pointer para a array que armazena os elementos da lista
+    T *arr;
 
-    void expand()
-    { // Função para alocar mais espaço
+    // Número de items na lista
+    int currentSize;
 
-        // Cria um pointer para uma nova array com o dobro do espaço
-        maxSize *= 2;
-        T *temporary = new T[maxSize];
+    // Espaço alocado para a lista
+    int maxSize;
 
-        // Copia items para a nova array
-        for (int i = 0; i < currentSize; i++)
-        {
-            temporary[i] = arr[i];
-        }
+    // Método para alocar mais espaçao para a list
+    void expand();
 
-        // Substitui array
-        delete[] arr;
-        arr = temporary;
-    }
-
+    // Checa se a lista está cheia
     inline bool isFull() { return currentSize == maxSize; }
 
 public:
-    List()
-    {
-        arr = new T[1];
-        maxSize = 1;
-        currentSize = 0;
-    }
+    // Construtor
+    List();
 
-    void append(T item, int idx)
-    {
-        if (isFull())
-        {
-            expand();
-        }
+    // Adiciona item em posição especificada
+    void append(T item, int idx);
 
-        // Move os items a direita do novo item 1 espaço
-        for (int i = currentSize; i > idx; i--)
-        {
-            arr[i] = arr[i - 1];
-        }
+    // Adiciona item no final da lista
+    void append(T item);
 
-        arr[idx] = item;
-        currentSize++;
-    }
+    // Acessa item da lista
+    T &operator[](int idx);
 
-    void append(T item)
-    {
-        if (isFull())
-        {
-            expand();
-        }
-        arr[currentSize] = item;
-        currentSize++;
-    }
+    // Remove e retorna último item da lista
+    T pop();
 
-    T &operator[](int idx)
-    { // Sobrecarga do operador [] para acessar item
-        return arr[idx];
-    }
-
-    T pop()
-    { // Remove e retorna último item
-        currentSize--;
-        return arr[currentSize];
-    }
-
-    void print()
-    { // Debug
-        for (auto j = 0; j < currentSize; j++)
-        {
-            cout << arr[j] << " ";
-        }
-        cout << endl;
-    }
-
+    // Acessa último item da lista
     inline T &back() { return arr[currentSize - 1]; }
 
+    // Retorna tamanho atual
     inline int length() { return currentSize; };
 
+    // Libera espaço ocupado na memória pela array
     inline void free() { delete[] arr; }
+
+    // Debug
+    void print();
 };
 #endif
