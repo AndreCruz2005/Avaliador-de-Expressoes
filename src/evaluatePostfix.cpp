@@ -15,7 +15,7 @@ void Evaluator::EvaluatePostfix()
     int lim = postfix.length();
     for (auto i = 0; i < lim; i++)
     {
-        string token = *postfix.at(i);
+        string token = postfix[i];
         try
         {
             if (token == "true" || token == "false")

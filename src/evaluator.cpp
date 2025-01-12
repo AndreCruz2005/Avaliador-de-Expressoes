@@ -13,8 +13,6 @@ void Evaluator::Evaluate()
 {
     ExpressionToPostfix();
     EvaluatePostfix();
-
-    delete this;
 }
 
 Evaluator::~Evaluator()
@@ -23,15 +21,15 @@ Evaluator::~Evaluator()
     if (!error && solveStack.length() > 0)
     {
 
-        if (*boolPositions.at(0))
+        if (boolPositions[0])
         {
             // Imprime true ou false se o resultado final for bool
-            string result = *solveStack.at(0) ? "true" : "false";
+            string result = solveStack[0] ? "true" : "false";
             cout << result << endl;
         }
         else
         {
-            cout << *solveStack.at(0) << endl;
+            cout << solveStack[0] << endl;
         }
     }
     else

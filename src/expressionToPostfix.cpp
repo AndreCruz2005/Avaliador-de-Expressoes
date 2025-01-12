@@ -7,13 +7,11 @@ using namespace std;
 void Evaluator::ExpressionToPostfix()
 { // Usa o algoritmo shunting yard para converter a expressão da forma infixa para a pós-fixa
 
-    cout << "test: " << *expression.at(3) << endl;
-
     // Itera sobre cada elemento da expressão infixa
     int lim = expression.length();
     for (auto i = 0; i < lim; i++)
     {
-        string token = *expression.at(i);
+        string token = expression[i];
         try
         {
             if (token == "true" || token == "false")
@@ -39,7 +37,7 @@ void Evaluator::ExpressionToPostfix()
             // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pós-fixa
             else if (token == ")")
             {
-                while (*holdingStack.at(holdingStack.length() - 1) != "(")
+                while (holdingStack.back() != "(")
                 {
                     // Adicona o último operador a pós-fixa caso nao seja o (
                     postfix.insert(holdingStack.pop());
@@ -50,17 +48,17 @@ void Evaluator::ExpressionToPostfix()
             else
             {
                 // Determina a precedência do ultimo operador na holding stack e a precedência do novo operador
-                int topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(*holdingStack.at(holdingStack.length() - 1)) : -1;
+                int topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 int newOperatorPrecedence = OperatorPrecedence(token);
 
                 // Caso a precedencia do topo da stack seja maior, remove operadores até poder adicionar o novo operador
                 while (newOperatorPrecedence <= topStackPrecedence)
                 {
                     // Adiciona operadores removidos à pós-fixa
-                    postfix.insert(*holdingStack.at(holdingStack.length() - 1));
+                    postfix.insert(holdingStack.back());
                     holdingStack.pop();
                     // Atualiza precedência do topo da stack
-                    topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(*holdingStack.at(holdingStack.length() - 1)) : -1;
+                    topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 }
                 // Adiciona novo operador à holdingStack
                 holdingStack.insert(token);

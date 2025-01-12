@@ -7,30 +7,20 @@ using namespace std;
 
 int main()
 {
-    // Recebe o número de casos a ser processado
     int cases;
     cin >> cases;
     cin.ignore();
 
-    // Recebe cada caso
     for (auto i = 0; i < cases; i++)
     {
-        cout << "Expressão: " << endl;
-        // Pega a expressão como string
-        string expressao;
-        getline(cin, expressao);
+        string expression;
+        getline(cin, expression);
 
-        ExpressionFormatter *formatString = new ExpressionFormatter(expressao); // Cria a instância do formatador de expressão
-        List<string> returnList = formatString->Format();
+        ExpressionFormatter inputFormatter(expression);
+        List<string> returnList = inputFormatter.Format();
 
-        cout << "Lista: ";
-        for (auto i = 0; i < returnList.length(); i++)
-        {
-            cout << *returnList.at(i) << " ";
-        }
-        cout << "\n";
-
-        delete formatString;
+        Evaluator inputEvaluator(returnList);
+        inputEvaluator.Evaluate();
     }
 
     return 0;

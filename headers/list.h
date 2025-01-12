@@ -6,93 +6,78 @@ template <typename T>
 class List
 {
     T *arr;
-    int size;
+    int currentSize;
+    int maxSize;
+
+    void expand()
+    {
+        maxSize *= 2;
+        T *temporaryArray = new T[maxSize];
+
+        for (int i = 0; i < currentSize; i++)
+        {
+            temporaryArray[i] = arr[i];
+        }
+        delete[] arr;
+        arr = temporaryArray;
+    }
+
+    inline bool isFull() { return currentSize == maxSize; };
 
 public:
     List()
     {
-        arr = new T[0];
-        size = 0;
-    }
-
-    void insert(T item)
-    {
-        size++;
-        T *newArr = new T[size];
-
-        for (auto i = 0; i < size - 1; i++)
-        {
-            newArr[i] = arr[i];
-        }
-
-        newArr[size - 1] = item;
-
-        delete[] arr;
-        arr = newArr;
+        arr = new T[1];
+        maxSize = 1;
+        currentSize = 0;
     }
 
     void insert(T item, int idx)
     {
-        if (idx < 0 || idx > size)
+        if (isFull())
         {
-            throw invalid_argument("Indíce fora da lista");
+            expand();
         }
-
-        size++;
-        T *newArr = new T[size];
-
-        for (auto i = 0; i < size; i++)
+        for (int i = currentSize; i > idx; i--)
         {
-            if (i < idx)
-            {
-                newArr[i] = arr[i];
-            }
-            else if (i == idx)
-            {
-                newArr[i] = item;
-            }
-            else
-            {
-                newArr[i] = arr[i - 1];
-            }
+            arr[i] = arr[i - 1];
         }
-
-        delete[] arr;
-        arr = newArr;
+        arr[idx] = item;
+        currentSize++;
     }
 
-    T *at(int idx)
+    void insert(T item)
     {
-        if (idx < 0 || idx >= size)
+        if (isFull())
         {
-            throw invalid_argument("Indíce fora da lista");
+            expand();
         }
-        return &arr[idx];
+        arr[currentSize] = item;
+        currentSize++;
+    }
+
+    T &operator[](int idx)
+    {
+        return arr[idx];
     }
 
     T pop()
     {
-        T lastItem = arr[size - 1];
-
-        size--;
-        T *newArr = new T[size];
-
-        for (auto i = 0; i < size; i++)
-        {
-            newArr[i] = arr[i];
-        }
-
-        delete[] arr;
-        arr = newArr;
-
-        return lastItem;
+        currentSize--;
+        return arr[currentSize];
     }
 
-    ~List()
+    void print()
     {
-        delete[] arr;
+        for (auto j = 0; j < currentSize; j++)
+        {
+            cout << arr[j] << " ";
+        }
+        cout << endl;
     }
 
-    inline int length() { return size; };
+    inline T &back() { return arr[currentSize - 1]; }
+
+    inline int length() { return currentSize; };
 };
 #endif
