@@ -48,5 +48,5 @@ int Evaluator::Operations(int a, int b, string op)
     else if (op == "<")
         return (a < b);
     else
-        throw invalid_argument("op inválido");
+        throw invalid_argument("Operador inválido");
 }

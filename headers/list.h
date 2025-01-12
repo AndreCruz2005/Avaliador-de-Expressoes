@@ -17,7 +17,7 @@ class List
     // Método para alocar mais espaçao para a list
     void expand();
 
-    // Checa se a lista está cheia
+    // Checa se a lista está cheia para chamar o método expand()
     inline bool isFull() { return currentSize == maxSize; }
 
 public:
@@ -30,7 +30,7 @@ public:
     // Adiciona item no final da lista
     void append(T item);
 
-    // Acessa item da lista
+    // Sobrecarga do operador [] para acessar item da lista
     T &operator[](int idx);
 
     // Remove e retorna último item da lista
@@ -39,7 +39,7 @@ public:
     // Acessa último item da lista
     inline T &back() { return arr[currentSize - 1]; }
 
-    // Retorna tamanho atual
+    // Retorna número de items na lista
     inline int length() { return currentSize; };
 
     // Libera espaço ocupado na memória pela array

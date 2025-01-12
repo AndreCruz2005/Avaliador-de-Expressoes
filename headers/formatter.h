@@ -21,7 +21,7 @@ class ExpressionFormatter
     // Converte a expressão de string para lista e armazena-a em formattedExpression
     void ConvertToList();
 
-    // Converte os menos unários no lista para uma representação que pode ser mais facilmente processada
+    // Converte os menos unários no lista para uma representação que pode ser mais facilmente processada pela classe evaluator
     void HandleUnaryMinus();
 
 public:

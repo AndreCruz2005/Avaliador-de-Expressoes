@@ -34,20 +34,22 @@ void Evaluator::ExpressionToPostfix()
                 holdingStack.append("(");
             }
 
-            // Caso ache um parêntesis de direita, adiciona todos os items entre parêntesis à pós-fixa
+            // Caso ache um parêntese de direita, adiciona os operadores da holdingStack à pós-fixa até achar o parêntese respectivo de esquerda
             else if (token == ")")
             {
                 while (holdingStack.back() != "(")
                 {
-                    // Adicona o último operador a pós-fixa caso nao seja o (
                     postfix.append(holdingStack.pop());
                 }
+
+                // Para remover o parenteses esquerdo sem o adicionar à pós-fixa
                 holdingStack.pop();
             }
 
             else
             {
-                // Determina a precedência do ultimo operador na holding stack e a precedência do novo operador
+                // Determina a precedência do ultimo operador na holding stack e a precedência do novo operador.
+                // O novo operador só pode ser adicionado caso a precedência no topo da holding stack seja menor
                 int topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 int newOperatorPrecedence = OperatorPrecedence(token);
 

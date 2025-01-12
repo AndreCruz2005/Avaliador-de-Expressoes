@@ -5,26 +5,27 @@
 template <class T>
 List<T>::List()
 {
-    arr = new T[1];
-    maxSize = 1;
+    // A lista é iniciada com 8 espaços para reduzir a necessidade de expansões
+    arr = new T[8];
+    maxSize = 8;
     currentSize = 0;
 }
 
 template <class T>
 void List<T>::expand()
-{ // Função para alocar mais espaço
+{ // Função para alocar mais espaço, é chamada quando todos os espaços da lista estão ocupados
 
     // Cria um pointer para uma nova array com o dobro do espaço
     maxSize *= 2;
     T *temporary = new T[maxSize];
 
-    // Copia items para a nova array
+    // Copia items da array original para a nova array
     for (int i = 0; i < currentSize; i++)
     {
         temporary[i] = arr[i];
     }
 
-    // Substitui array
+    // Deleta a array original e aponta arr para a array expandida
     delete[] arr;
     arr = temporary;
 }
@@ -37,7 +38,7 @@ void List<T>::append(T item, int idx)
         expand();
     }
 
-    // Move os items a direita do novo item 1 espaço
+    // Abre espaço para um novo item movendo todos os items que estão a direita do index, 1 espaço
     for (int i = currentSize; i > idx; i--)
     {
         arr[i] = arr[i - 1];
@@ -61,13 +62,13 @@ void List<T>::append(T item)
 
 template <class T>
 T &List<T>::operator[](int idx)
-{ // Sobrecarga do operador [] para acessar item
+{
     return arr[idx];
 }
 
 template <class T>
 T List<T>::pop()
-{ // Remove e retorna último item
+{
     currentSize--;
     return arr[currentSize];
 }

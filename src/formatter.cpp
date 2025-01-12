@@ -68,6 +68,7 @@ void ExpressionFormatter::HandleUnaryMinus()
             if (token == "-" && !lastTokenWasNumber)
             {
                 // Substitui o operador unário por -1 ***. *** opera como multiplicação mas com mais prioridade
+                // Essa representação permite que a operação (- int) possa ser processada corretamente pela classe Evaluator
                 formattedExpression[i] += "1";
                 formattedExpression.append("***", i + 1);
             }

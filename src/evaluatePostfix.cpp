@@ -5,13 +5,13 @@
 using namespace std;
 
 void Evaluator::EvaluatePostfix()
-{ // Processa a operação pós-fixa, ao final o lista solveStack possuirá apenas 1 elemento que será o resultado
+{ // Processa a expressão pós-fixa, ao final a lista solveStack possuirá apenas 1 elemento que será o resultado
 
     // Variáveis que conterão os operandos de cada operação, e identificarão se cada valor é booleano ou não
     int operandLeft, operandRight;
     bool isBoolLeft, isBoolRight;
 
-    // Itera sobre os elementos da expressão
+    // Itera sobre os elementos da expressão pós-fixa
     int lim = postfix.length();
     for (auto i = 0; i < lim; i++)
     {
@@ -50,11 +50,10 @@ void Evaluator::EvaluatePostfix()
                 goto errorCaught;
             }
 
-            // Adquire os últimos dois valores na solveStack e os remove dela para operação
+            // Remove os dois valores na solveStack para realizar a operação
             operandRight = solveStack.pop();
             operandLeft = solveStack.pop();
 
-            // Realiza a operação com os dois últimos valores da solveStack
             try
             {
                 int result = Operations(operandLeft, operandRight, token); // Chama metódo para operação
