@@ -50,8 +50,8 @@ void ExpressionFormatter::HandleUnaryMinus()
 
         try
         {
-            // Considera parentêses direito como número
-            if (token == ")")
+            // Considera parentêses direito ou valor booleano como número
+            if (token == ")" || token == "true" || token == "false")
             {
                 goto wasNumber;
             }
