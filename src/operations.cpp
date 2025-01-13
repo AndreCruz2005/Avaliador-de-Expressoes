@@ -13,7 +13,7 @@ int Evaluator::OperatorPrecedence(string op)
         return 5;
     else if (op == "<" || op == ">" || op == ">=" || op == "<=")
         return 4;
-    else if (op == "==" || "!=")
+    else if (op == "==" || op == "!=")
         return 3;
     else if (op == "&&")
         return 2;
