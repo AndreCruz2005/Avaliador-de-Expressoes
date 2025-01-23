@@ -44,13 +44,15 @@ main.cpp
 
 #### Header
 
-- **list.h**: declaração da classe **List**.
+- **dynamicArray.h**: declaração da classe **DynamicArray**.
+- **list.h**: declaração da classe **List** que herda **DynamicArray**.
+- **stack.h**: declaração da classe **Stack** que herda **DynamicArray**.
 - **formatter.h**: declaração da classe **ExpressionFormatter**.
 - **evaluator.h**: declaração da classe **Evaluator**.
 
 #### Source
 
-- **list.cpp**: implementação da classe **List**
+- **dynamicArray.cpp**: implementação da classe **DynamicArray**
 - **formatter.cpp**: implementação da classe **ExpressionFormatter**.
 - **evaluator.cpp**: implementação do construtor, destrutor e método _Evaluate_ da classe **Evaluator**.
 - **operations.cpp**: implementação dos métodos _OperatorPrecedence_ e _Operations_ da classe **Evaluator**.
@@ -122,7 +124,7 @@ O lista retornado pelo método _List[string] Format()_ é então usado para inic
 
 ### Avaliação da expressão pós-fixa
 
-Uma vez realizada a conversão, o metódo _void EvaluatePostfix()_ é chamado. Este itera sobre os items de _postfix_, adicionando operandos à lista _solveStack_. Quando um operador é achado, os dois últimos operandos de _solveStack_ são removidos e o método _int Operations(int, int, string)_ é chamado para realizar a operação, com o resultado sendo adicionanado à _solveStack_. Paralelamente, o método também atualiza a lista de bool _boolPositions_ que identifica quais operandos na _solveStack_ são booleanos e quais são inteiros. Ao final de uma execucação do método sem erros, o único elemento restante na _solveStack_ será o resultado da expressão.
+Uma vez realizada a conversão, o metódo _void EvaluatePostfix()_ é chamado. Este itera sobre os items de _postfix_, adicionando operandos à pilha _solveStack_. Quando um operador é achado, os dois últimos operandos de _solveStack_ são removidos e o método _int Operations(int, int, string)_ é chamado para realizar a operação, com o resultado sendo adicionanado à _solveStack_. Paralelamente, o método também atualiza a pilha de bool _boolPositions_ que identifica quais operandos na _solveStack_ são booleanos e quais são inteiros. Ao final de uma execucação do método sem erros, o único elemento restante na _solveStack_ será o resultado da expressão.
 
 ### Identificação de erros
 
