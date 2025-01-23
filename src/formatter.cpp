@@ -13,9 +13,9 @@ void ExpressionFormatter::ConvertToList()
 { // Converte a expressão de string para lista
 
     // Itera sobre os caracteres da string
-    for (auto i = 0; i < expression.size(); i++)
+    for (size_t i = 0; i < expression.size(); i++)
     {
-        string character(1, expression[i]);
+        const string character(1, expression[i]);
 
         // Ignora caractere vazio
         if (character == " ")
@@ -43,10 +43,11 @@ void ExpressionFormatter::ConvertToList()
 
 void ExpressionFormatter::HandleUnaryMinus()
 {
-    for (auto i = 0; i < formattedExpression.length(); i++)
+    const size_t limit = formattedExpression.length();
+    for (size_t i = 0; i < limit; i++)
     {
         // Itera sobre os elementos do lista da expressão
-        string token = formattedExpression[i];
+        const string &token = formattedExpression[i];
 
         try
         {
@@ -62,7 +63,7 @@ void ExpressionFormatter::HandleUnaryMinus()
         wasNumber:
             lastTokenWasNumber = true;
         }
-        catch (invalid_argument &)
+        catch (const invalid_argument &)
         {
             // Checa se a token é um '-' após um operador, ou seja, um operador unário
             if (token == "-" && !lastTokenWasNumber)
