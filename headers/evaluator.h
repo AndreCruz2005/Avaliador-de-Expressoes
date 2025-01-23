@@ -2,6 +2,7 @@
 #define EVALUATOR_H
 #include <string>
 #include "list.h"
+#include "stack.h"
 using namespace std;
 
 class Evaluator
@@ -22,11 +23,11 @@ private:
 
     // Listas usadas para converter a expressão da notação infixa para a pós-fixa
     List<string> postfix;
-    List<string> holdingStack;
+    Stack<string> holdingStack;
 
     // Listas usadas para o algoritmo de resolução da expressão pos-fixa
-    List<int> solveStack;
-    List<bool> boolPositions;
+    Stack<int> solveStack;
+    Stack<bool> boolPositions;
 
     // Variável que determina se há um erro na expressão
     bool error = false;

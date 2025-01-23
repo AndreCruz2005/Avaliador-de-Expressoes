@@ -11,7 +11,7 @@ Programa feito em C++ que recebe strings contendo expressões matemáticas e ló
 ## Compilação
 
 ```
-g++ -o main main.cpp src/list.cpp src/formatter.cpp src/evaluator.cpp src/operations.cpp src/expressionToPostfix.cpp src/evaluatePostfix.cpp
+g++ -o main main.cpp src/dynamicArray.cpp src/formatter.cpp src/evaluator.cpp src/operations.cpp src/expressionToPostfix.cpp src/evaluatePostfix.cpp
 ```
 
 ## Execução
@@ -24,16 +24,18 @@ g++ -o main main.cpp src/list.cpp src/formatter.cpp src/evaluator.cpp src/operat
 
 ```
 headers/
+    dynamicArray.h
     evaluator.h
     formatter.h
     list.h
+    stack.h
 
 src/
+    dynamicArray.cpp
     evaluatePostfix.cpp
     evaluator.cpp
     expressionToPostfix.cpp
     formatter.cpp
-    list.cpp
     operations.cpp
 
 main.cpp

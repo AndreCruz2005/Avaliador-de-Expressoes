@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../headers/list.h"
+#include "../headers/stack.h"
 #include "../headers/evaluator.h"
 using namespace std;
 
@@ -8,10 +8,10 @@ void Evaluator::ExpressionToPostfix()
 { // Usa o algoritmo shunting yard para converter a expressão da forma infixa para a pós-fixa
 
     // Itera sobre cada elemento da expressão infixa
-    int lim = expression.length();
-    for (auto i = 0; i < lim; i++)
+    const size_t lim = expression.length();
+    for (size_t i = 0; i < lim; i++)
     {
-        string token = expression[i];
+        const string &token = expression[i];
         try
         {
             if (token == "true" || token == "false")

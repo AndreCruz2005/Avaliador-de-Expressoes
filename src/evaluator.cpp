@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../headers/list.h"
+#include "../headers/stack.h"
 #include "../headers/evaluator.h"
 using namespace std;
 
@@ -21,15 +21,15 @@ Evaluator::~Evaluator()
     if (!error && solveStack.length() > 0)
     {
 
-        if (boolPositions[0])
+        if (boolPositions.back())
         {
             // Imprime true ou false se o resultado final for bool
-            string result = solveStack[0] ? "true" : "false";
+            const string result = solveStack.back() ? "true" : "false";
             cout << result << endl;
         }
         else
         {
-            cout << solveStack[0] << endl;
+            cout << solveStack.back() << endl;
         }
     }
     else

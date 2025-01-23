@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "../headers/formatter.h"
-#include "../headers/list.h"
+#include "..\headers\dynamicArray.h"
 using namespace std;
 
 ExpressionFormatter::ExpressionFormatter(string expression)

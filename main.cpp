@@ -12,7 +12,7 @@ int main()
     cin >> cases;
     cin.ignore();
 
-    for (auto i = 0; i < cases; i++)
+    for (size_t i = 0; i < cases; i++)
     {
         // Recebe a expressão como string em cada caso
         string expression;
