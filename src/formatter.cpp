@@ -43,8 +43,7 @@ void ExpressionFormatter::ConvertToList()
 
 void ExpressionFormatter::HandleUnaryMinus()
 {
-    const size_t limit = formattedExpression.length();
-    for (size_t i = 0; i < limit; i++)
+    for (size_t i = 0; i < formattedExpression.length(); i++)
     {
         // Itera sobre os elementos do lista da expressão
         const string &token = formattedExpression[i];
@@ -82,5 +81,6 @@ List<string> ExpressionFormatter::Format()
 {
     ConvertToList();
     HandleUnaryMinus();
+    formattedExpression.print();
     return formattedExpression;
 }

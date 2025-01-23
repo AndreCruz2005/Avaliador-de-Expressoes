@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
     // Recebe número de casos
-    int cases;
+    size_t cases;
     cin >> cases;
     cin.ignore();
 
