@@ -5,7 +5,7 @@
 using namespace std;
 
 void Evaluator::EvaluatePostfix()
-{ // Processa a expressão pós-fixa, ao final a lista solveStack possuirá apenas 1 elemento que será o resultado
+{ // Processa a expressão pós-fixa, ao final a stack solveStack possuirá apenas 1 elemento que será o resultado
 
     // Variáveis que conterão os operandos de cada operação, e identificarão se cada valor é booleano ou não
     int operandLeft, operandRight;
@@ -59,7 +59,7 @@ void Evaluator::EvaluatePostfix()
                 const int result = Operations(operandLeft, operandRight, token); // Chama metódo para operação
                 solveStack.append(result);                                       // Adiciona resultado à solvestack
 
-                // Adiciona o tipo do resultado da operação ao lista boolPositions
+                // Adiciona o tipo do resultado da operação à stack boolPositions
                 const bool resultType = !(token == "+" || token == "-" || token == "*" || token == "/" || token == "***");
                 boolPositions.append(resultType);
 

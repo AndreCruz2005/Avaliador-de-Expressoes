@@ -81,6 +81,5 @@ List<string> ExpressionFormatter::Format()
 {
     ConvertToList();
     HandleUnaryMinus();
-    formattedExpression.print();
     return formattedExpression;
 }
