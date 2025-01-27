@@ -45,7 +45,7 @@ void ExpressionFormatter::HandleUnaryMinus()
 {
     for (size_t i = 0; i < formattedExpression.length(); i++)
     {
-        // Itera sobre os elementos do lista da expressão
+        // Itera sobre os elementos da expressão em lista
         const string &token = formattedExpression[i];
 
         try
@@ -72,6 +72,7 @@ void ExpressionFormatter::HandleUnaryMinus()
                 formattedExpression[i] += "1";
                 formattedExpression.append("***", i + 1);
             }
+
             lastTokenWasNumber = false;
         }
     }

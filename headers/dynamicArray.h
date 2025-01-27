@@ -5,10 +5,10 @@ using namespace std;
 template <class T>
 class DynamicArray
 {
-    // Espaço alocado para a objeto
+    // Espaço alocado para a array
     int maxSize;
 
-    // Método para alocar mais espaçao para a objeto
+    // Método para alocar mais espaçao para a array
     void expand();
 
     // Checa se a objeto está cheia para chamar o método expand()
@@ -28,16 +28,16 @@ public:
     // Adiciona item em posição especificada
     void append(T item, int idx);
 
-    // Adiciona item no final da objeto
+    // Adiciona item no final da array
     void append(T item);
 
-    // Acessa último item da objeto
+    // Acessa último item da array
     inline T &back() { return arr[currentSize - 1]; }
 
-    // Retorna número de items na objeto
+    // Retorna número de items na array
     inline int length() { return currentSize; };
 
-    // Libera espaço ocupado na memória pela objeto
+    // Libera espaço ocupado na memória pela array
     inline void free() { delete[] arr; }
 
     // Debug

@@ -65,7 +65,7 @@ void DynamicArray<T>::print()
 { // Debug
     for (size_t j = 0; j < currentSize; j++)
     {
-        cout << arr[j] << " ";
+        cout << arr[j] << endl;
     }
     cout << endl;
 }

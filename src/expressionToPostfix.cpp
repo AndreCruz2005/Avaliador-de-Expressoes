@@ -26,9 +26,9 @@ void Evaluator::ExpressionToPostfix()
         }
         catch (invalid_argument &)
         {
-            // Em caso de exceção, assume que token é parêntesis ou operador
+            // Em caso de exceção, assume-se que token é parêntese ou operador
 
-            // Caso ache um parêntesis de esquerda, adiciona-o a holding stack
+            // Caso ache um parêntese de esquerda, adiciona-o a holding stack
             if (token == "(")
             {
                 holdingStack.append("(");
@@ -42,7 +42,7 @@ void Evaluator::ExpressionToPostfix()
                     postfix.append(holdingStack.pop());
                 }
 
-                // Para remover o parenteses esquerdo sem o adicionar à pós-fixa
+                // Para remover o parêntese esquerdo sem o adicionar à pós-fixa
                 holdingStack.pop();
             }
 
@@ -53,7 +53,7 @@ void Evaluator::ExpressionToPostfix()
                 int topStackPrecedence = holdingStack.length() > 0 ? OperatorPrecedence(holdingStack.back()) : -1;
                 int newOperatorPrecedence = OperatorPrecedence(token);
 
-                // Caso a precedencia do topo da stack seja maior, remove operadores até poder adicionar o novo operador
+                // Caso a precedencia do topo da stack seja maior ou igual, remove operadores até poder adicionar o novo operador
                 while (newOperatorPrecedence <= topStackPrecedence)
                 {
                     // Adiciona operadores removidos à pós-fixa

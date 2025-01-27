@@ -15,7 +15,7 @@ class ExpressionFormatter
     // Variáveis para conversão da expressão de string para lista
     string lastCharacter = " ";
 
-    // Varíaveis para formatação de operadores unários
+    // Varíavel para formatação de operadores unários
     bool lastTokenWasNumber = false;
 
     // Converte a expressão de string para lista e armazena-a em formattedExpression
