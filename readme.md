@@ -84,7 +84,7 @@ true + 3
 
 ### Conversão de String para Lista
 
-Para cada caso, uma instância da classe _ExpressionFormatter_ é iniciada com a expressão em string, o metódo _List[string] Format()_ é chamado em main.cpp que por sua vez chama _void ConvertToList()_ para transformar a expressão em uma lista de strings.
+Para cada caso, uma instância da classe _ExpressionFormatter_ é iniciada com a expressão em string, o método _List[string] Format()_ é chamado em main.cpp que por sua vez chama _void ConvertToList()_ para transformar a expressão em uma lista de strings.
 
 ```
 {"1"}
@@ -96,7 +96,7 @@ Para cada caso, uma instância da classe _ExpressionFormatter_ é iniciada com a
 {"true", "+", "3"}
 ```
 
-Em seguida, é chamado o método _void HandleUnaryMinus()_ que itera sobre as listas e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 items '-1' e '*\*\*', estes representam a mesma operação, mas tornam-na mais fácil de ser processada pelos algoritmos usados nos métodos da classe *Evaluator*.
+Em seguida, é chamado o método _void HandleUnaryMinus()_ que itera sobre as listas e caso encontre um '-' em frente a outro operador considera-o um operador unário e o substitui por 2 itens '-1' e '*\*\*', estes representam a mesma operação, mas tornam-na mais fácil de ser processada pelos algoritmos usados nos métodos da classe *Evaluator*.
 
 ```
 {"1"}
@@ -110,7 +110,7 @@ Em seguida, é chamado o método _void HandleUnaryMinus()_ que itera sobre as li
 
 ### Conversão para Pós-Fixa
 
-O lista retornado pelo método _List[string] Format()_ é então usado para iniciar uma instância da classe _Evaluator_. O método _void Evaluate()_ é chamado em main.cpp que por sua vez chama _void ExpressionToPostfix()_. Este método itera sobre os items da lista _expression_ onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outro lista _postfix_ que representa a expressão na notação pós-fixa. Durante este processo, o método _int OperatorPrecedence(string)_ é chamado para determinar a precedênia dos operadores na expressão.
+O lista retornado pelo método _List[string] Format()_ é então usado para iniciar uma instância da classe _Evaluator_. O método _void Evaluate()_ é chamado em main.cpp que por sua vez chama _void ExpressionToPostfix()_. Este método itera sobre os items da lista _expression_ onde está armazenada a expressão na notação infixa, e usa o algoritmo Shunting Yard para criar outra lista _postfix_ que representa a expressão na notação pós-fixa. Durante este processo, o método _int OperatorPrecedence(string)_ é chamado para determinar a precedênia dos operadores na expressão.
 
 ```
 {"1"}
@@ -124,7 +124,7 @@ O lista retornado pelo método _List[string] Format()_ é então usado para inic
 
 ### Avaliação da expressão pós-fixa
 
-Uma vez realizada a conversão, o metódo _void EvaluatePostfix()_ é chamado. Este itera sobre os items de _postfix_, adicionando operandos à pilha _solveStack_. Quando um operador é achado, os dois últimos operandos de _solveStack_ são removidos e o método _int Operations(int, int, string)_ é chamado para realizar a operação, com o resultado sendo adicionanado à _solveStack_. Paralelamente, o método também atualiza a pilha de bool _boolPositions_ que identifica quais operandos na _solveStack_ são booleanos e quais são inteiros. Ao final de uma execucação do método sem erros, o único elemento restante na _solveStack_ será o resultado da expressão.
+Uma vez realizada a conversão, o método _void EvaluatePostfix()_ é chamado. Este itera sobre os itens de _postfix_, adicionando operandos à pilha _solveStack_. Quando um operador é achado, os dois últimos operandos de _solveStack_ são removidos e o método _int Operations(int, int, string)_ é chamado para realizar a operação, com o resultado sendo adicionando à _solveStack_. Paralelamente, o método também atualiza a pilha de bool _boolPositions_ que identifica quais operandos na _solveStack_ são booleanos e quais são inteiros. Ao final de uma execução do método sem erros, o único elemento restante na _solveStack_ será o resultado da expressão.
 
 ### Identificação de erros
 
